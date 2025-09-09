@@ -158,19 +158,78 @@ OPENAI_MODEL=gpt-4o-mini                  # オプション、モデル設定
 - D3.js v7（インタラクティブグラフ可視化）
 - CSS Variables（一貫したテーマ）
 
+### プロジェクト構造
+```
+webui/
+├── src/
+│   ├── components/           # React components
+│   │   ├── ConceptDetails.tsx   # Sidebar concept information panel
+│   │   ├── D3Graph.tsx         # Main graph visualization component
+│   │   └── Toolbar.tsx         # Filter controls and legend
+│   ├── types/               # TypeScript type definitions
+│   │   └── index.ts            # GraphData, Concept, Edge, TierFilter types
+│   ├── utils/               # Utility functions
+│   │   └── dataLoader.ts       # Graph data loading logic
+│   ├── data/                # Sample/test data
+│   │   └── sample.ts           # Sample concept map data
+│   ├── App.tsx              # Main application component
+│   ├── App.css              # Global styles
+│   └── main.tsx             # React entry point
+├── scripts/                 # Build and deployment scripts
+│   └── generate-static.js      # Static HTML generation script
+├── dist/                    # Build output directory
+├── viewer.html              # Legacy HTML viewer (preserved)
+├── package.json
+├── vite.config.ts
+└── tsconfig.json
+```
+
 ### 開発ワークフロー
 ```bash
 cd webui
 npm install
-npm run dev          # 開発サーバー（HMR付き）
-npm run build        # 本番ビルド
-npm run build:static # 静的HTML生成
+npm run dev          # 開発サーバー（HMR付き） http://localhost:3000
+npm run build        # 本番ビルド（React SPA）
+npm run build:static # 静的HTML生成（全デプロイメント形式）
 ```
 
 ### データ統合
 - `webui/public/graph.json`に生成データを配置して開発
 - 本番では`./graph.json`を自動読み込み
 - サンプルデータへの自動フォールバック
+
+### コンポーネントアーキテクチャ
+
+**主要コンポーネント:**
+- **App.tsx**: メインアプリケーションコンテナ、状態管理
+- **D3Graph.tsx**: D3.js使用のコア可視化コンポーネント、力学的グラフレイアウト
+- **ConceptDetails.tsx**: 選択概念の詳細情報表示パネル
+- **Toolbar.tsx**: 概念tierフィルタリングと関係タイプ凡例
+
+**パフォーマンス最適化:**
+- `useMemo`でデータ処理の再計算防止
+- `useCallback`で安定したイベントハンドラー
+- 適切な依存配列で無限再レンダリング防止
+- コンポーネントアンマウント時のD3クリーンアップ
+
+### ビルド出力形式
+1. **React SPA** (`dist/index.html`): モダンシングルページアプリケーション
+2. **レガシービューア** (`dist/viewer_legacy.html`): オリジナルHTMLとD3.js
+3. **静的ビューア** (`dist/viewer_static.html`): 埋め込みデータの自己完結型
+4. **データファイル** (`dist/graph.json`): 外部利用用JSONデータ
+
+### D3.js統合のベストプラクティス
+- DOM要素参照に`useRef`使用
+- useEffectクリーンアップでD3選択をクリーン
+- ReactステートマネジメントでD3イベント処理
+- D3レンダリングロジックをReactライフサイクルから分離
+
+### トラブルシューティング
+**一般的な問題:**
+1. **無限再レンダリング**: useEffect依存関係チェック
+2. **D3競合**: D3選択とイベントリスナーの適切なクリーンアップ確認
+3. **データ読み込み**: `graph.json`形式とアクセシビリティ確認
+4. **ビルドエラー**: TypeScript型とインポートパス確認
 
 ## Git ワークフローガイドライン
 
