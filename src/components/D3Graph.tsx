@@ -12,6 +12,7 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedNode, setSelectedNode] = useState<D3Node | null>(null);
+  const [hasUserSelected, setHasUserSelected] = useState(false);
 
   const handleNodeSelect = useCallback((concept: Concept) => {
     onNodeSelect(concept);
@@ -106,6 +107,7 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
       setSelectedNode(d);
       d3.select(this as any).classed('selected', true);
       handleNodeSelect(d);
+      if (event) setHasUserSelected(true); // Mark as user-selected if event exists
     };
 
     // Node interactions
@@ -165,9 +167,9 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
 
     svg.call(zoom);
 
-    // Auto-select first core concept
+    // Auto-select first core concept only if user hasn't made a selection
     const firstCore = nodes.find(d => d.tier === 'core');
-    if (firstCore) {
+    if (firstCore && !hasUserSelected) {
       setTimeout(() => {
         const firstCoreNode = node.filter(d => d === firstCore);
         if (!firstCoreNode.empty()) {
@@ -204,7 +206,7 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
     return () => {
       tooltip.remove();
     };
-  }, [processedData, filters, handleNodeSelect]);
+  }, [processedData, filters, handleNodeSelect, hasUserSelected]);
 
   return (
     <div ref={containerRef} id="graph-container">
