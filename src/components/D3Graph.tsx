@@ -82,7 +82,7 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
       .enter()
       .append('text')
       .attr('class', 'edge-label')
-      .text(d => d.type);
+      .text(d => d.relation || d.type);
 
     const node = nodeG.selectAll('g')
       .data(nodes)

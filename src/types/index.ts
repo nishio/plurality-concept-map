@@ -15,7 +15,9 @@ export interface Concept {
 export interface Edge {
   source: string;
   target: string;
-  type: string;
+  type?: string; // Legacy field, kept for backward compatibility
+  relation?: string; // Short relation label for graph display
+  relation_description?: string; // Full natural language description
   confidence: number;
   evidence: Evidence[];
 }
