@@ -35,7 +35,8 @@ class Concept:
 class Edge:
     source: str
     target: str
-    relation: str
+    relation: str  # Short label for graph display (1-3 words)
+    relation_description: str  # Full natural language description
     confidence: float = 0.7
     evidence: List[Evidence] = field(default_factory=list)
     section_id: Optional[str] = None
@@ -184,10 +185,11 @@ def main():
             src = slugify_id(e.get("source_label",""))
             tgt = slugify_id(e.get("target_label",""))
             erelation = e.get("relation","")
+            erelation_desc = e.get("relation_description","")
             if not (src and tgt and erelation):
                 continue
             edge = Edge(
-                source=src, target=tgt, relation=erelation,
+                source=src, target=tgt, relation=erelation, relation_description=erelation_desc,
                 confidence=float(e.get("confidence",0.7)),
                 evidence=[Evidence(text=x.get("text","")) for x in e.get("evidence",[]) if x.get("text")],
                 section_id=sec.id
@@ -208,10 +210,10 @@ def main():
             w.writerow([c.id, c.label, c.tier, (c.definition or ""), "|".join(c.aliases), "|".join(evidence_texts)])
 
     with (out_dir / "edges.csv").open("w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f); w.writerow(["source","target","type","confidence","evidence"])
+        w = csv.writer(f); w.writerow(["source","target","relation","relation_description","confidence","evidence"])
         for e in filtered_edges: 
             evidence_texts = [truncate_evidence(ev.text) for ev in e.evidence]
-            w.writerow([e.source, e.target, e.relation, f"{e.confidence:.2f}", "|".join(evidence_texts)])
+            w.writerow([e.source, e.target, e.relation, e.relation_description, f"{e.confidence:.2f}", "|".join(evidence_texts)])
 
     graph = {
         "nodes": [
@@ -228,7 +230,8 @@ def main():
             {
                 "source": e.source, 
                 "target": e.target, 
-                "relation": e.relation, 
+                "relation": e.relation,
+                "relation_description": e.relation_description, 
                 "confidence": e.confidence,
                 "evidence": [{"text": ev.text} for ev in e.evidence]
             } for e in filtered_edges
@@ -240,9 +243,8 @@ def main():
     for c in merged_concepts:
         if c.tier == "core": lines.append(f'  {c.id}["{c.label}"]')
     for e in filtered_edges:
-        # Show all relationships in mermaid format
-        relation_short = e.relation[:20] + "..." if len(e.relation) > 20 else e.relation
-        lines.append(f"  {e.source} -->|{relation_short}| {e.target}")
+        # Use short relation label for mermaid format
+        lines.append(f"  {e.source} -->|{e.relation}| {e.target}")
     lines.append("```")
     Path(args.out,"mermaid.md").write_text("\n".join(lines), encoding="utf-8")
 

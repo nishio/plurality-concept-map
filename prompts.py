@@ -36,7 +36,8 @@ Return STRICT JSON with:
   "edges": [{{ 
     "source_label": str, 
     "target_label": str, 
-    "relation": str,               # natural language description of the relationship
+    "relation": str,               # short label for graph display (1-3 words)
+    "relation_description": str,   # full natural language description
     "confidence": float,           # 0.0-1.0
     "evidence": [{{"text": str}}]  # short quotes from the section
   }}]
@@ -44,8 +45,9 @@ Return STRICT JSON with:
 
 Rules:
 - Only connect the provided concepts. No new nodes.
-- Express relationships using natural language that includes the target concept (e.g., "Logistic regression is a type of machine learning").
-- Use the original language of the text: if the source text is in Japanese, use Japanese relation descriptions. Only use English for terms that appear in English in the original text.
+- For "relation": provide a short label (1-3 words) suitable for graph display (e.g., "includes", "type of", "requires").
+- For "relation_description": provide full natural language description that includes the target concept (e.g., "Logistic regression is a type of machine learning").
+- Use the original language of the text: if the source text is in Japanese, use Japanese for both relation and relation_description. Only use English for terms that appear in English in the original text.
 - Evidence must ground the relation; omit the edge if no textual support.
 - Keep 3-12 edges per section.
 
