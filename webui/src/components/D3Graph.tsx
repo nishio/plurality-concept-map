@@ -141,10 +141,10 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
       .data(nodes)
       .enter()
       .append('g')
-      .attr('class', d => `node ${d.tier}`);
+      .attr('class', d => `node ${d.tier || 'core'}`);
 
     node.append('circle')
-      .attr('r', d => d.tier === 'core' ? 12 : (d.tier === 'supplementary' ? 10 : 8));
+      .attr('r', d => (d.tier === 'core' || !d.tier) ? 12 : (d.tier === 'supplementary' ? 10 : 8));
 
     node.append('text')
       .attr('dx', 16)
@@ -173,7 +173,7 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
       .on('mouseover', (event, d) => {
         if (selectedNodeRef.current !== d) {
           tooltip.style('display', 'block')
-            .html(`<strong>${d.label}</strong><br/>${d.definition || ''}<br/><em>${d.tier}</em>`);
+            .html(`<strong>${d.label}</strong><br/>${d.definition || ''}<br/><em>${d.tier || 'core'}</em>`);
         }
       })
       .on('mousemove', (event) => {
@@ -235,8 +235,8 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
       svg.call(zoom.transform, transformRef.current);
     }
 
-    // Auto-select first core concept only if user hasn't made a selection
-    const firstCore = nodes.find(d => d.tier === 'core');
+    // Auto-select first core concept (including nodes without tier) only if user hasn't made a selection
+    const firstCore = nodes.find(d => d.tier === 'core' || !d.tier);
     if (firstCore && !hasUserSelectedRef.current) {
       setTimeout(() => {
         const firstCoreNode = node.filter(d => d === firstCore);
