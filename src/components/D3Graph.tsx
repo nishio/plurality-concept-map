@@ -1,24 +1,38 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import * as d3 from 'd3';
-import { GraphData, Concept, D3Node, D3Link, TierFilter } from '../types';
+import { GraphData, Concept, Edge, D3Node, D3Link } from '../types';
 
 interface D3GraphProps {
   data: GraphData;
-  filters: TierFilter;
   onNodeSelect: (concept: Concept) => void;
+  onEdgeSelect: (edge: Edge) => void;
 }
 
-export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect }) => {
+export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSelect }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedNode, setSelectedNode] = useState<D3Node | null>(null);
   const [hasUserSelected, setHasUserSelected] = useState(false);
+  const selectedNodeRef = useRef<D3Node | null>(null);
+  const hasUserSelectedRef = useRef(false);
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const transformRef = useRef<d3.ZoomTransform>(d3.zoomIdentity);
 
+  const onNodeSelectRef = useRef(onNodeSelect);
+  const onEdgeSelectRef = useRef(onEdgeSelect);
+
+  // Update refs when callbacks change
+  useEffect(() => {
+    onNodeSelectRef.current = onNodeSelect;
+    onEdgeSelectRef.current = onEdgeSelect;
+  }, [onNodeSelect, onEdgeSelect]);
+
   const handleNodeSelect = useCallback((concept: Concept) => {
-    onNodeSelect(concept);
-  }, [onNodeSelect]);
+    onNodeSelectRef.current(concept);
+  }, []);
+
+  const handleEdgeSelect = useCallback((edge: Edge) => {
+    onEdgeSelectRef.current(edge);
+  }, []);
 
   const processedData = useMemo(() => {
     const nodes: D3Node[] = data.nodes.map(d => ({ ...d }));
@@ -82,7 +96,14 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
       .enter()
       .append('text')
       .attr('class', 'edge-label')
-      .text(d => d.relation || d.type);
+      .text(d => d.relation || d.type)
+      .style('cursor', 'pointer')
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        hasUserSelectedRef.current = true;
+        setHasUserSelected(true); // Mark as user-selected
+        handleEdgeSelect(d);
+      });
 
     const node = nodeG.selectAll('g')
       .data(nodes)
@@ -106,16 +127,19 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
     // Selection handling
     const selectNode = function(event: any, d: D3Node) {
       node.classed('selected', false);
-      setSelectedNode(d);
+      selectedNodeRef.current = d;
       d3.select(this as any).classed('selected', true);
       handleNodeSelect(d);
-      if (event) setHasUserSelected(true); // Mark as user-selected if event exists
+      if (event) {
+        hasUserSelectedRef.current = true;
+        setHasUserSelected(true); // Mark as user-selected if event exists
+      }
     };
 
     // Node interactions
     node.on('click', selectNode)
       .on('mouseover', (event, d) => {
-        if (selectedNode !== d) {
+        if (selectedNodeRef.current !== d) {
           tooltip.style('display', 'block')
             .html(`<strong>${d.label}</strong><br/>${d.definition || ''}<br/><em>${d.tier}</em>`);
         }
@@ -181,7 +205,7 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
 
     // Auto-select first core concept only if user hasn't made a selection
     const firstCore = nodes.find(d => d.tier === 'core');
-    if (firstCore && !hasUserSelected) {
+    if (firstCore && !hasUserSelectedRef.current) {
       setTimeout(() => {
         const firstCoreNode = node.filter(d => d === firstCore);
         if (!firstCoreNode.empty()) {
@@ -190,35 +214,12 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
       }, 100);
     }
 
-    // Apply filters
-    const applyFilters = () => {
-      node.style('display', (d: D3Node) => {
-        return (d.tier === 'core' && filters.core) || 
-               (d.tier === 'supplementary' && filters.supplementary) || 
-               (d.tier === 'advanced' && filters.advanced) ? null : 'none';
-      });
-      
-      const visible = new Set<string>();
-      node.filter(function() { 
-        return d3.select(this).style('display') !== 'none'; 
-      }).each((d: D3Node) => visible.add(d.id));
-      
-      link.style('display', (e: D3Link) => {
-        return (visible.has(e.source.id) && visible.has(e.target.id)) ? null : 'none';
-      });
-      
-      edgeLabel.style('display', (e: D3Link) => {
-        return (visible.has(e.source.id) && visible.has(e.target.id)) ? null : 'none';
-      });
-    };
-
-    applyFilters();
 
     // Cleanup tooltip on unmount
     return () => {
       tooltip.remove();
     };
-  }, [processedData, filters, handleNodeSelect, hasUserSelected]);
+  }, [processedData]);
 
   return (
     <div ref={containerRef} id="graph-container">

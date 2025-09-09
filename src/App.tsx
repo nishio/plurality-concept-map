@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Toolbar } from './components/Toolbar';
 import { ConceptDetails } from './components/ConceptDetails';
 import { D3Graph } from './components/D3Graph';
-import { GraphData, Concept, TierFilter } from './types';
+import { GraphData, Concept, Edge } from './types';
 import { sampleData } from './data/sample';
 import { loadGraphData } from './utils/dataLoader';
 import './App.css';
@@ -11,18 +11,16 @@ function App() {
   const [data, setData] = useState<GraphData>(sampleData);
   const [loading, setLoading] = useState(true);
   const [selectedConcept, setSelectedConcept] = useState<Concept | null>(null);
-  const [filters, setFilters] = useState<TierFilter>({
-    core: true,
-    supplementary: true,
-    advanced: true
-  });
+  const [selectedEdge, setSelectedEdge] = useState<Edge | null>(null);
 
   const handleNodeSelect = (concept: Concept) => {
     setSelectedConcept(concept);
+    setSelectedEdge(null); // Clear edge selection when selecting node
   };
 
-  const handleFilterChange = (newFilters: TierFilter) => {
-    setFilters(newFilters);
+  const handleEdgeSelect = (edge: Edge) => {
+    setSelectedEdge(edge);
+    setSelectedConcept(null); // Clear node selection when selecting edge
   };
 
   useEffect(() => {
@@ -53,14 +51,14 @@ function App() {
   return (
     <div id="app">
       <div id="sidebar">
-        <Toolbar filters={filters} onFilterChange={handleFilterChange} />
-        <ConceptDetails concept={selectedConcept} />
+        <Toolbar />
+        <ConceptDetails concept={selectedConcept} edge={selectedEdge} data={data} onConceptSelect={handleNodeSelect} onEdgeSelect={handleEdgeSelect} />
       </div>
       
       <D3Graph 
         data={data} 
-        filters={filters}
         onNodeSelect={handleNodeSelect}
+        onEdgeSelect={handleEdgeSelect}
       />
     </div>
   );
