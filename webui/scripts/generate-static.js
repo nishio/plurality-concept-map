@@ -5,23 +5,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const docsPath = path.join(__dirname, '..', '..', 'docs');
 const distPath = path.join(__dirname, '..', 'dist');
-const templatePath = path.join(__dirname, '..', 'viewer.html');
 
-function generateStaticViewer(graphData) {
-  // Read the original HTML template
-  const template = fs.readFileSync(templatePath, 'utf-8');
-  
-  // Replace the placeholder with actual data
-  const staticHTML = template.replace(
-    '/*__GRAPH_JSON__*/',
-    JSON.stringify(graphData, null, 2)
-  );
-  
-  return staticHTML;
-}
-
-function copyStaticViewer() {
+function copyToDocsDirectory() {
   try {
     // Check if dist directory exists
     if (!fs.existsSync(distPath)) {
@@ -29,53 +16,59 @@ function copyStaticViewer() {
       return;
     }
 
-    // Copy the original viewer.html to dist as a fallback
-    const originalViewerPath = path.join(__dirname, '..', 'viewer.html');
-    const distViewerPath = path.join(distPath, 'viewer_legacy.html');
-    
-    if (fs.existsSync(originalViewerPath)) {
-      fs.copyFileSync(originalViewerPath, distViewerPath);
-      console.log('✅ Legacy viewer copied to dist/viewer_legacy.html');
+    // Create docs directory if it doesn't exist
+    if (!fs.existsSync(docsPath)) {
+      fs.mkdirSync(docsPath, { recursive: true });
+      console.log('✅ Created docs/ directory');
     }
 
-    // Load actual graph data from public/graph.json
+    // Copy all files from dist to docs
+    const distFiles = fs.readdirSync(distPath);
+    
+    for (const file of distFiles) {
+      const sourcePath = path.join(distPath, file);
+      const destPath = path.join(docsPath, file);
+      
+      if (fs.lstatSync(sourcePath).isDirectory()) {
+        // Copy directory recursively
+        fs.cpSync(sourcePath, destPath, { recursive: true });
+      } else {
+        // Copy file
+        fs.copyFileSync(sourcePath, destPath);
+      }
+    }
+
+    // Load actual graph data from public/graph.json and copy to docs
     const publicGraphPath = path.join(__dirname, '..', 'public', 'graph.json');
-    let graphData;
     
     if (fs.existsSync(publicGraphPath)) {
       try {
         const graphContent = fs.readFileSync(publicGraphPath, 'utf-8');
-        graphData = JSON.parse(graphContent);
-        console.log('✅ Loaded actual graph data from public/graph.json');
+        const graphData = JSON.parse(graphContent);
+        
+        // Write graph.json to docs
+        const docsGraphPath = path.join(docsPath, 'graph.json');
+        fs.writeFileSync(docsGraphPath, JSON.stringify(graphData, null, 2));
+        console.log('✅ Graph.json copied to docs/');
       } catch (error) {
         console.error('❌ Error reading graph.json:', error);
-        graphData = { nodes: [], edges: [] };
       }
     } else {
       console.warn('⚠️ No graph.json found in public/, using empty data');
-      graphData = { nodes: [], edges: [] };
+      const emptyData = { nodes: [], edges: [] };
+      const docsGraphPath = path.join(docsPath, 'graph.json');
+      fs.writeFileSync(docsGraphPath, JSON.stringify(emptyData, null, 2));
+      console.log('✅ Empty graph.json created in docs/');
     }
 
-    // Write graph.json to dist
-    const graphJsonPath = path.join(distPath, 'graph.json');
-    fs.writeFileSync(graphJsonPath, JSON.stringify(graphData, null, 2));
-    console.log('✅ Graph.json copied to dist/');
-
-    // Generate static viewer with embedded data
-    const staticHTML = generateStaticViewer(graphData);
-    const staticViewerPath = path.join(distPath, 'viewer_static.html');
-    fs.writeFileSync(staticViewerPath, staticHTML);
-    console.log('✅ Static viewer with embedded data created at dist/viewer_static.html');
-
+    console.log('✅ SPA static build copied to docs/ directory');
     console.log('\n📖 Usage:');
-    console.log('- React development: npm run dev');
-    console.log('- Production React: serve dist/index.html');
-    console.log('- Legacy viewer: serve dist/viewer_legacy.html');
-    console.log('- Static viewer: serve dist/viewer_static.html');
+    console.log('- GitHub Pages: Push docs/ directory to repository');
+    console.log('- Local testing: serve docs/index.html');
 
   } catch (error) {
-    console.error('❌ Error generating static files:', error);
+    console.error('❌ Error copying to docs directory:', error);
   }
 }
 
-copyStaticViewer();
+copyToDocsDirectory();
