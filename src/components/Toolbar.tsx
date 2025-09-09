@@ -43,21 +43,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({ filters, onFilterChange }) => 
           発展概念
         </label>
       </div>
-      <div className="relation-legend">
-        <div className="section-title">関係性の種類</div>
-        <div className="legend-item">
-          <div className="legend-line"></div>
-          <span>part_of: の一部</span>
-        </div>
-        <div className="legend-item">
-          <div className="legend-line"></div>
-          <span>uses: を使用</span>
-        </div>
-        <div className="legend-item">
-          <div className="legend-line"></div>
-          <span>example_of: の例</span>
-        </div>
-      </div>
     </div>
   );
 };
