@@ -7,14 +7,13 @@ Return STRICT JSON with this schema:
   "concepts": [{{ 
       "label": str,                    # canonical short name
       "aliases": [str],                # synonyms / code tokens etc.
-      "tier": "core"|"supplementary"|"advanced",
       "definition": str,               # <= 30 words plain definition
       "evidence": [{{"text": str}}]    # short quotes from the section
   }}]
 }}
 
 Rules:
-- Prefer curriculum-aligned "core" concepts. Use "supplementary" for helpful extras, "advanced" for beyond-syllabus.
+- Focus on curriculum-aligned concepts that are central for learning.
 - Avoid meta, anecdotes, history unless explicitly in objectives.
 - Use short labels, no markdown.
 - Use the original language of the text: if the source text is in Japanese, use Japanese labels and definitions. Only use English for terms that appear in English in the original text.
@@ -30,17 +29,14 @@ Chapter file: {chapter}
 
 SECTION_RELATIONS_PROMPT = """
 You are given a list of concept labels and the same section text.
-Task: propose relations BETWEEN THESE CONCEPTS ONLY, as a list of edges with limited types.
-
-Allowed relation types (choose one):
-{relation_types}
+Task: propose relations BETWEEN THESE CONCEPTS ONLY, as a list of edges.
 
 Return STRICT JSON with:
 {{
   "edges": [{{ 
     "source_label": str, 
     "target_label": str, 
-    "type": str, 
+    "relation": str,               # natural language description of the relationship
     "confidence": float,           # 0.0-1.0
     "evidence": [{{"text": str}}]  # short quotes from the section
   }}]
@@ -48,8 +44,8 @@ Return STRICT JSON with:
 
 Rules:
 - Only connect the provided concepts. No new nodes.
-- Prefer prerequisite_of, is_a, part_of when clear from definitions.
-- Use the original language of the text: if the source text is in Japanese, use Japanese labels. Only use English for terms that appear in English in the original text.
+- Express relationships using natural language that includes the target concept (e.g., "Logistic regression is a type of machine learning").
+- Use the original language of the text: if the source text is in Japanese, use Japanese relation descriptions. Only use English for terms that appear in English in the original text.
 - Evidence must ground the relation; omit the edge if no textual support.
 - Keep 3-12 edges per section.
 

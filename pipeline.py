@@ -15,10 +15,7 @@ def truncate_evidence(text: str, max_len: int = 200) -> str:
     half = max_len // 2 - 5
     return f"{text[:half]}...{text[-half:]}"
 
-RELATION_TYPES = [
-    "is_a", "part_of", "prerequisite_of", "example_of",
-    "contrasts_with", "parameter_of", "returns", "uses"
-]
+# RELATION_TYPES removed - now using free-form natural language relations
 
 @dataclass
 class Evidence:
@@ -38,7 +35,7 @@ class Concept:
 class Edge:
     source: str
     target: str
-    type: str
+    relation: str
     confidence: float = 0.7
     evidence: List[Evidence] = field(default_factory=list)
     section_id: Optional[str] = None
@@ -112,8 +109,7 @@ def dedupe_concepts(concepts: List[Concept]) -> List[Concept]:
 def filter_edges(edges: List[Edge], node_ids: set) -> List[Edge]:
     out = []
     for e in edges:
-        if e.type not in RELATION_TYPES: 
-            continue
+        # Relation types are now free-form natural language - accept all
         if e.source in node_ids and e.target in node_ids and e.source != e.target:
             out.append(e)
     return out
@@ -176,7 +172,7 @@ def main():
         rprompt = SECTION_RELATIONS_PROMPT.format(
             section_title=sec.title,
             chapter=sec.chapter,
-            relation_types=", ".join(RELATION_TYPES),
+            # relation_types parameter removed from prompt
             concepts=json.dumps(concept_labels, ensure_ascii=False, indent=2),
             text=sec.text[:12000]
         )
@@ -187,11 +183,11 @@ def main():
         for e in rdata.get("edges", []):
             src = slugify_id(e.get("source_label",""))
             tgt = slugify_id(e.get("target_label",""))
-            etype = e.get("type","")
-            if not (src and tgt and etype):
+            erelation = e.get("relation","")
+            if not (src and tgt and erelation):
                 continue
             edge = Edge(
-                source=src, target=tgt, type=etype,
+                source=src, target=tgt, relation=erelation,
                 confidence=float(e.get("confidence",0.7)),
                 evidence=[Evidence(text=x.get("text","")) for x in e.get("evidence",[]) if x.get("text")],
                 section_id=sec.id
@@ -215,7 +211,7 @@ def main():
         w = csv.writer(f); w.writerow(["source","target","type","confidence","evidence"])
         for e in filtered_edges: 
             evidence_texts = [truncate_evidence(ev.text) for ev in e.evidence]
-            w.writerow([e.source, e.target, e.type, f"{e.confidence:.2f}", "|".join(evidence_texts)])
+            w.writerow([e.source, e.target, e.relation, f"{e.confidence:.2f}", "|".join(evidence_texts)])
 
     graph = {
         "nodes": [
@@ -232,7 +228,7 @@ def main():
             {
                 "source": e.source, 
                 "target": e.target, 
-                "type": e.type, 
+                "relation": e.relation, 
                 "confidence": e.confidence,
                 "evidence": [{"text": ev.text} for ev in e.evidence]
             } for e in filtered_edges
@@ -244,7 +240,9 @@ def main():
     for c in merged_concepts:
         if c.tier == "core": lines.append(f'  {c.id}["{c.label}"]')
     for e in filtered_edges:
-        if e.type in ("prerequisite_of","is_a"): lines.append(f"  {e.source} -->|{e.type}| {e.target}")
+        # Show all relationships in mermaid format
+        relation_short = e.relation[:20] + "..." if len(e.relation) > 20 else e.relation
+        lines.append(f"  {e.source} -->|{relation_short}| {e.target}")
     lines.append("```")
     Path(args.out,"mermaid.md").write_text("\n".join(lines), encoding="utf-8")
 
@@ -253,8 +251,11 @@ def main():
     viewer = viewer.replace("/*__GRAPH_JSON__*/", json.dumps(graph, ensure_ascii=False))
     Path(args.out,"viewer.html").write_text(viewer, encoding="utf-8")
     
-    # Enhanced viewer
-    enhanced_viewer = (Path(__file__).parent / "viewer_enhanced.html").read_text(encoding="utf-8")
+    # Enhanced viewer (use regular viewer.html as fallback)
+    enhanced_viewer_path = Path(__file__).parent / "viewer_enhanced.html"
+    if not enhanced_viewer_path.exists():
+        enhanced_viewer_path = Path(__file__).parent / "viewer.html"
+    enhanced_viewer = enhanced_viewer_path.read_text(encoding="utf-8")
     enhanced_viewer = enhanced_viewer.replace("/*__GRAPH_JSON__*/", json.dumps(graph, ensure_ascii=False))
     Path(args.out,"viewer_enhanced.html").write_text(enhanced_viewer, encoding="utf-8")
 
