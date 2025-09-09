@@ -7,8 +7,8 @@ interface ToolbarProps {
 
 export const Toolbar: React.FC<ToolbarProps> = ({ selectedSection, onSectionChange }) => {
   const sections = [
-    { value: '', label: 'セクション3-0（デフォルト）' },
-    { value: 'sec3-1', label: 'セクション3-1' },
+    { value: '', label: '3-0 プルラリティ（多元性）とは？' },
+    { value: 'sec3-1', label: '3-1 ⿻世界に生きる' },
   ];
 
   return (
