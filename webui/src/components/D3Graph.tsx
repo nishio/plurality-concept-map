@@ -6,9 +6,11 @@ interface D3GraphProps {
   data: GraphData;
   onNodeSelect: (concept: Concept) => void;
   onEdgeSelect: (edge: Edge) => void;
+  selectedConcept?: Concept | null;
+  selectedEdge?: Edge | null;
 }
 
-export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSelect }) => {
+export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSelect, selectedConcept, selectedEdge }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasUserSelected, setHasUserSelected] = useState(false);
@@ -45,6 +47,48 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
     return { nodes, links, id2node };
   }, [data]);
 
+  // Helper function to update highlights
+  const updateHighlights = useCallback(() => {
+    if (!svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    const nodes = svg.selectAll('.node');
+    const links = svg.selectAll('.link');
+    const edgeLabels = svg.selectAll('.edge-label');
+
+    // Reset all highlights
+    nodes.classed('highlighted', false).classed('dimmed', false);
+    links.classed('highlighted', false).classed('dimmed', false);
+    edgeLabels.classed('highlighted', false).classed('dimmed', false);
+
+    if (selectedConcept) {
+      // Only highlight the selected concept node itself
+      nodes.classed('highlighted', (d: any) => d.id === selectedConcept.id)
+           .classed('dimmed', (d: any) => d.id !== selectedConcept.id);
+    } else if (selectedEdge) {
+      // Highlight selected edge and its nodes
+      const sourceId = typeof selectedEdge.source === 'string' ? selectedEdge.source : selectedEdge.source.id;
+      const targetId = typeof selectedEdge.target === 'string' ? selectedEdge.target : selectedEdge.target.id;
+      
+      nodes.classed('highlighted', (d: any) => d.id === sourceId || d.id === targetId)
+           .classed('dimmed', (d: any) => d.id !== sourceId && d.id !== targetId);
+      
+      links.classed('highlighted', (d: any) => 
+        (d.source.id === sourceId && d.target.id === targetId) ||
+        (d.source.id === targetId && d.target.id === sourceId))
+           .classed('dimmed', (d: any) => 
+        !((d.source.id === sourceId && d.target.id === targetId) ||
+          (d.source.id === targetId && d.target.id === sourceId)));
+      
+      edgeLabels.classed('highlighted', (d: any) => 
+        (d.source.id === sourceId && d.target.id === targetId) ||
+        (d.source.id === targetId && d.target.id === sourceId))
+                .classed('dimmed', (d: any) => 
+        !((d.source.id === sourceId && d.target.id === targetId) ||
+          (d.source.id === targetId && d.target.id === sourceId)));
+    }
+  }, [selectedConcept, selectedEdge, data]);
+
   useEffect(() => {
     if (!svgRef.current || !containerRef.current) return;
 
@@ -64,18 +108,6 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
 
     const g = svg.append('g');
 
-    // Arrow marker
-    svg.append('defs').append('marker')
-      .attr('id', 'arrowhead')
-      .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 20)
-      .attr('refY', 0)
-      .attr('markerWidth', 6)
-      .attr('markerHeight', 6)
-      .attr('orient', 'auto')
-      .append('path')
-      .attr('d', 'M0,-5L10,0L0,5')
-      .attr('fill', '#64748b');
 
     const linkG = g.append('g');
     const labelG = g.append('g');
@@ -215,11 +247,19 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
     }
 
 
+    // Apply initial highlights
+    updateHighlights();
+
     // Cleanup tooltip on unmount
     return () => {
       tooltip.remove();
     };
-  }, [processedData]);
+  }, [processedData, updateHighlights]);
+
+  // Update highlights when selection changes
+  useEffect(() => {
+    updateHighlights();
+  }, [updateHighlights]);
 
   return (
     <div ref={containerRef} id="graph-container">

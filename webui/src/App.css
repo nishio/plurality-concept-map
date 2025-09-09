@@ -307,16 +307,49 @@ input[type="checkbox"] {
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
 }
 
+/* Highlight styles for connected nodes and edges */
+.node.highlighted circle {
+  stroke-width: 3px;
+  stroke: var(--primary-color) !important;
+  filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.4));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.node.dimmed circle {
+  fill: #e2e8f0 !important;
+  stroke: #94a3b8 !important;
+}
+
+.node.dimmed text {
+  fill: var(--text-primary) !important;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 .link { 
   stroke: var(--text-secondary); 
   stroke-opacity: 0.6; 
   stroke-width: 2px;
-  marker-end: url(#arrowhead);
+  transition: all 0.3s ease;
 }
 .link.selected { 
   stroke: var(--primary-color); 
   stroke-opacity: 0.8; 
   stroke-width: 3px;
+}
+
+.link.highlighted {
+  stroke: var(--primary-color) !important;
+  stroke-opacity: 1 !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 3px rgba(37, 99, 235, 0.5));
+}
+
+.link.dimmed {
+  stroke-opacity: 0.15 !important;
 }
 
 .edge-label {
@@ -327,6 +360,20 @@ input[type="checkbox"] {
   background: var(--bg-color);
   padding: 2px 4px;
   border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.edge-label.highlighted {
+  fill: var(--text-primary) !important;
+  font-weight: 600;
+  font-size: 11px;
+  paint-order: stroke fill;
+  stroke: rgba(255, 255, 255, 0.8);
+  stroke-width: 3px;
+}
+
+.edge-label.dimmed {
+  opacity: 0.2;
   cursor: pointer;
   transition: fill 0.2s;
 }

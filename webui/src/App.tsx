@@ -59,6 +59,8 @@ function App() {
         data={data} 
         onNodeSelect={handleNodeSelect}
         onEdgeSelect={handleEdgeSelect}
+        selectedConcept={selectedConcept}
+        selectedEdge={selectedEdge}
       />
     </div>
   );
