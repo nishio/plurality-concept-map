@@ -13,6 +13,8 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedNode, setSelectedNode] = useState<D3Node | null>(null);
   const [hasUserSelected, setHasUserSelected] = useState(false);
+  const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  const transformRef = useRef<d3.ZoomTransform>(d3.zoomIdentity);
 
   const handleNodeSelect = useCallback((concept: Concept) => {
     onNodeSelect(concept);
@@ -163,9 +165,19 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
     // Zoom behavior
     const zoom = d3.zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.3, 3])
-      .on('zoom', (event) => g.attr('transform', event.transform));
+      .on('zoom', (event) => {
+        g.attr('transform', event.transform);
+        transformRef.current = event.transform; // Save transform state
+      });
 
+    // Store zoom for zoom controls
+    zoomRef.current = zoom;
     svg.call(zoom);
+    
+    // Restore previous transform state
+    if (transformRef.current && !transformRef.current.toString().includes('1,0,0,1,0,0')) {
+      svg.call(zoom.transform, transformRef.current);
+    }
 
     // Auto-select first core concept only if user hasn't made a selection
     const firstCore = nodes.find(d => d.tier === 'core');
@@ -214,15 +226,21 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, filters, onNodeSelect })
       <div className="zoom-controls">
         <div className="zoom-btn" onClick={() => {
           const svg = d3.select(svgRef.current!);
-          svg.transition().call(d3.zoom<SVGSVGElement, unknown>().scaleBy, 1.5);
+          if (zoomRef.current) {
+            svg.transition().call(zoomRef.current.scaleBy, 1.5);
+          }
         }}>+</div>
         <div className="zoom-btn" onClick={() => {
           const svg = d3.select(svgRef.current!);
-          svg.transition().call(d3.zoom<SVGSVGElement, unknown>().scaleBy, 0.67);
+          if (zoomRef.current) {
+            svg.transition().call(zoomRef.current.scaleBy, 0.67);
+          }
         }}>−</div>
         <div className="zoom-btn" style={{ fontSize: '12px' }} onClick={() => {
           const svg = d3.select(svgRef.current!);
-          svg.transition().call(d3.zoom<SVGSVGElement, unknown>().transform, d3.zoomIdentity);
+          if (zoomRef.current) {
+            svg.transition().call(zoomRef.current.transform, d3.zoomIdentity);
+          }
         }}>⌂</div>
       </div>
     </div>
