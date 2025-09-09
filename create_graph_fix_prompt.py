@@ -336,14 +336,18 @@ def main():
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("graph_fix_prompt.txt"),
-        help="プロンプトの出力先ファイル（デフォルト: graph_fix_prompt.txt）",
+        default=None,
+        help="プロンプトの出力先ファイル（省略時: fix_prompt_{section-id}.txt）",
     )
     parser.add_argument(
         "--max-concepts", type=int, default=15, help="最大概念数（デフォルト: 15）"
     )
 
     args = parser.parse_args()
+
+    # デフォルトの出力ファイル名を設定
+    if args.output is None:
+        args.output = Path(f"fix_prompt_{args.section_id}.txt")
 
     try:
         # ファイルを自動で探す
