@@ -11,7 +11,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [selectedConcept, setSelectedConcept] = useState<Concept | null>(null);
   const [selectedEdge, setSelectedEdge] = useState<Edge | null>(null);
-  const [selectedSection, setSelectedSection] = useState<string>('sec3-0');
+  const [selectedSection, setSelectedSection] = useState<string>('sec1-0');
 
   const handleNodeSelect = (concept: Concept) => {
     setSelectedConcept(concept);
@@ -42,7 +42,7 @@ function App() {
   useEffect(() => {
     const initializeData = async () => {
       try {
-        const graphData = await loadGraphData('sec3-0');
+        const graphData = await loadGraphData('sec1-0');
         if (graphData.nodes.length > 0) {
           setData(graphData);
         }

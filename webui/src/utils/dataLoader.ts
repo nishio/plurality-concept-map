@@ -16,7 +16,7 @@ const fallbackData: GraphData = {
 
 export const loadGraphData = async (section?: string): Promise<GraphData> => {
   // Determine which file to load based on section
-  const fileName = section ? `graph_${section}.json` : 'graph_sec3-0.json';
+  const fileName = section ? `graph_${section}.json` : 'graph_sec1-0.json';
   
   // Try to load the specified JSON file
   try {
@@ -31,17 +31,17 @@ export const loadGraphData = async (section?: string): Promise<GraphData> => {
   }
   
   // If specified section file not found, try fallback options
-  if (section) {
-    // Try the default sec3-0 file
+  if (section && section !== 'sec1-0') {
+    // Try the default sec1-0 file
     try {
-      const response = await fetch('./graph_sec3-0.json');
+      const response = await fetch('./graph_sec1-0.json');
       if (response.ok) {
         const data = await response.json();
-        console.log('Loaded fallback graph_sec3-0.json successfully');
+        console.log('Loaded fallback graph_sec1-0.json successfully');
         return data;
       }
     } catch (error) {
-      console.warn('No graph_sec3-0.json found either');
+      console.warn('No graph_sec1-0.json found either');
     }
   }
   
