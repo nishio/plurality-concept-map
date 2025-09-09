@@ -1,30 +1,34 @@
 import { GraphData } from '../types';
 import { sampleData } from '../data/sample';
 
-export const loadGraphData = async (dataUrl?: string): Promise<GraphData> => {
-  if (dataUrl) {
-    try {
-      const response = await fetch(dataUrl);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch data from ${dataUrl}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.error('Failed to load graph data:', error);
-      throw error;
-    }
-  }
+export const loadGraphData = async (section?: string): Promise<GraphData> => {
+  // Determine which file to load based on section
+  const fileName = section ? `graph_${section}.json` : 'graph.json';
   
-  // Try to load from graph.json in public directory
+  // Try to load the specified JSON file
   try {
-    const response = await fetch('./graph.json');
+    const response = await fetch(`./${fileName}`);
     if (response.ok) {
       const data = await response.json();
-      console.log('Loaded graph.json successfully');
+      console.log(`Loaded ${fileName} successfully`);
       return data;
     }
   } catch (error) {
-    console.warn('No graph.json found, using sample data');
+    console.warn(`No ${fileName} found`);
+  }
+  
+  // If specified section file not found, try default graph.json
+  if (section) {
+    try {
+      const response = await fetch('./graph.json');
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Loaded default graph.json successfully');
+        return data;
+      }
+    } catch (error) {
+      console.warn('No graph.json found either');
+    }
   }
   
   // Fallback to sample data

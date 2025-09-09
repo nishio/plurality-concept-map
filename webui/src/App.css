@@ -47,6 +47,40 @@ html, body {
   color: var(--primary-color);
 }
 
+.section-selector {
+  margin-top: 12px;
+}
+
+.section-selector label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.section-selector select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.section-selector select:hover {
+  border-color: var(--primary-color);
+}
+
+.section-selector select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
 .filter-group {
   display: flex;
   gap: 12px;

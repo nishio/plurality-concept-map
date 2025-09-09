@@ -12,6 +12,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [selectedConcept, setSelectedConcept] = useState<Concept | null>(null);
   const [selectedEdge, setSelectedEdge] = useState<Edge | null>(null);
+  const [selectedSection, setSelectedSection] = useState<string>('');
 
   const handleNodeSelect = (concept: Concept) => {
     setSelectedConcept(concept);
@@ -21,6 +22,22 @@ function App() {
   const handleEdgeSelect = (edge: Edge) => {
     setSelectedEdge(edge);
     setSelectedConcept(null); // Clear node selection when selecting edge
+  };
+
+  const handleSectionChange = async (section: string) => {
+    setLoading(true);
+    setSelectedConcept(null);
+    setSelectedEdge(null);
+    setSelectedSection(section);
+    
+    try {
+      const graphData = await loadGraphData(section);
+      setData(graphData);
+    } catch (error) {
+      console.warn('Error loading section data:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -51,7 +68,7 @@ function App() {
   return (
     <div id="app">
       <div id="sidebar">
-        <Toolbar />
+        <Toolbar selectedSection={selectedSection} onSectionChange={handleSectionChange} />
         <ConceptDetails concept={selectedConcept} edge={selectedEdge} data={data} onConceptSelect={handleNodeSelect} onEdgeSelect={handleEdgeSelect} />
       </div>
       
