@@ -4,8 +4,6 @@
 
 AIを活用してPlurality本から概念と関係性を自動抽出し、インタラクティブな概念マップとして可視化するツールです。
 
-![Concept Map Screenshot](https://via.placeholder.com/800x400/2563eb/ffffff?text=Plurality+Concept+Map)
-
 ## ✨ 主な機能
 
 ### 🌐 オンライン版
@@ -17,7 +15,6 @@ AIを活用してPlurality本から概念と関係性を自動抽出し、イン
 - **多言語対応**: 日本語・英語テキストに対応（日本語原文なら日本語概念を生成）
 - **自然言語関係**: 固定タイプではなく自由形式の関係表現
 - **証拠付き**: 各概念・関係の根拠となる原文引用を保持
-- **重要度ベース**: max-conceptsによる重要度フィルタリング
 
 ### 🎨 モダンWebUI
 - **React 18 + TypeScript**: タイプセーフなモダン開発
@@ -25,11 +22,6 @@ AIを活用してPlurality本から概念と関係性を自動抽出し、イン
 - **レスポンシブデザイン**: デスクトップ・モバイル対応
 - **ハイライト機能**: 選択した概念の関連要素を強調表示
 - **日本語最適化**: Noto Sans JPフォントで美しい表示
-
-### 🤖 複数LLMモデル対応
-- **GPT-5-mini**: 最高品質（高コスト）
-- **GPT-4o-mini**: バランス重視（推奨）
-- **GPT-3.5-turbo**: 軽量・高速
 
 ## 🚀 クイックスタート
 
@@ -105,7 +97,6 @@ plurality-concept-map/
 │   │   │   └── Toolbar.tsx     # Header and controls
 │   │   ├── 📁 types/           # TypeScript definitions
 │   │   ├── 📁 utils/           # Data loading utilities
-│   │   └── 📁 data/            # Sample data
 │   ├── 📁 public/              # Static assets and data
 │   ├── package.json            # Node.js dependencies
 │   └── vite.config.ts          # Vite configuration
@@ -161,9 +152,8 @@ OPENAI_MODEL=gpt-4o-mini                  # オプション
 | `--input` | `contents/japanese` | 入力ディレクトリ |
 | `--out` | 必須 | 出力ディレクトリ |
 | `--segment-level` | `h2` | セクション分割レベル (h1/h2/h3) |
-| `--max-concepts` | `15` | セクションあたりの最大概念数 |
-| `--cross-section` | `false` | セクション間の関係分析 |
-| `--model` | `gpt-4o-mini` | 使用するLLMモデル |
+| `--max-concepts` | `10` | セクションあたりの最大概念数 |
+| `--model` | `gpt-5-mini` | 使用するLLMモデル |
 
 ### モデル選択ガイド
 | モデル | コスト | 品質 | 推奨用途 |

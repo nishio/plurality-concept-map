@@ -1,5 +1,18 @@
 import { GraphData } from '../types';
-import { sampleData } from '../data/sample';
+
+const fallbackData: GraphData = {
+  nodes: [
+    {
+      id: 'loading',
+      label: 'データ読み込み中...',
+      tier: 'core',
+      definition: 'グラフデータが読み込まれるまでお待ちください',
+      aliases: [],
+      evidence: []
+    }
+  ],
+  edges: []
+};
 
 export const loadGraphData = async (section?: string): Promise<GraphData> => {
   // Determine which file to load based on section
@@ -32,7 +45,7 @@ export const loadGraphData = async (section?: string): Promise<GraphData> => {
     }
   }
   
-  // Fallback to sample data
-  console.log('Using sample data');
-  return sampleData;
+  // Fallback to minimal data
+  console.log('Using fallback data - no graph files found');
+  return fallbackData;
 };

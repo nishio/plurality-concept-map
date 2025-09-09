@@ -121,7 +121,6 @@ def main():
     ap.add_argument("--out", required=True, help="Output directory")
     ap.add_argument("--segment-level", default="h2", choices=["h1","h2","h3"])
     ap.add_argument("--max-concepts", type=int, default=15)
-    ap.add_argument("--cross-section", type=str, default="false", help="true/false")
     ap.add_argument("--model", default=os.getenv("OPENAI_MODEL", "gpt-4o-mini"))
     args = ap.parse_args()
 
@@ -254,12 +253,15 @@ def main():
     Path(args.out,"viewer.html").write_text(viewer, encoding="utf-8")
     
     # Enhanced viewer (use regular viewer.html as fallback)
-    enhanced_viewer_path = Path(__file__).parent / "viewer_enhanced.html"
-    if not enhanced_viewer_path.exists():
-        enhanced_viewer_path = Path(__file__).parent / "viewer.html"
-    enhanced_viewer = enhanced_viewer_path.read_text(encoding="utf-8")
-    enhanced_viewer = enhanced_viewer.replace("/*__GRAPH_JSON__*/", json.dumps(graph, ensure_ascii=False))
-    Path(args.out,"viewer_enhanced.html").write_text(enhanced_viewer, encoding="utf-8")
+    try:
+        enhanced_viewer_path = Path(__file__).parent / "viewer_enhanced.html"
+        if not enhanced_viewer_path.exists():
+            enhanced_viewer_path = Path(__file__).parent / "viewer.html"
+        enhanced_viewer = enhanced_viewer_path.read_text(encoding="utf-8")
+        enhanced_viewer = enhanced_viewer.replace("/*__GRAPH_JSON__*/", json.dumps(graph, ensure_ascii=False))
+        Path(args.out,"viewer_enhanced.html").write_text(enhanced_viewer, encoding="utf-8")
+    except Exception as e:
+        print(f"Warning: Could not create enhanced viewer: {e}")
 
     print(f"Done. Outputs saved under: {args.out}")
 
