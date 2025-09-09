@@ -1,4 +1,5 @@
 import { GraphData } from '../types';
+import { sampleData } from '../data/sample';
 
 export const loadGraphData = async (dataUrl?: string): Promise<GraphData> => {
   if (dataUrl) {
@@ -14,16 +15,19 @@ export const loadGraphData = async (dataUrl?: string): Promise<GraphData> => {
     }
   }
   
-  // Fallback: try to load from graph.json in public directory
+  // Try to load from graph.json in public directory
   try {
     const response = await fetch('./graph.json');
     if (response.ok) {
-      return await response.json();
+      const data = await response.json();
+      console.log('Loaded graph.json successfully');
+      return data;
     }
   } catch (error) {
     console.warn('No graph.json found, using sample data');
   }
   
-  // Return empty data structure
-  return { nodes: [], edges: [] };
+  // Fallback to sample data
+  console.log('Using sample data');
+  return sampleData;
 };

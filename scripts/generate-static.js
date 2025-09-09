@@ -38,58 +38,31 @@ function copyStaticViewer() {
       console.log('✅ Legacy viewer copied to dist/viewer_legacy.html');
     }
 
-    // Create a sample graph.json file for testing
-    const sampleGraphData = {
-      "nodes": [
-        {
-          "id": "plurality",
-          "label": "プラリティ",
-          "definition": "多様性と協力を両立させる社会技術の概念",
-          "tier": "core",
-          "aliases": ["多様性協力", "Plurality"],
-          "evidence": [
-            {
-              "text": "プラリティは、多様性と協力という一見矛盾する要素を技術によって両立させることを目指す概念です。",
-              "section": "第1章"
-            }
-          ]
-        },
-        {
-          "id": "digital_democracy", 
-          "label": "デジタル民主主義",
-          "definition": "デジタル技術を活用した民主的意思決定の仕組み",
-          "tier": "supplementary",
-          "aliases": ["電子民主主義", "Digital Democracy"],
-          "evidence": [
-            {
-              "text": "デジタル民主主義は、インターネットやAIを活用して、より多くの人々が政治プロセスに参加できる仕組みを作ります。",
-              "section": "第2章"
-            }
-          ]
-        }
-      ],
-      "edges": [
-        {
-          "source": "digital_democracy",
-          "target": "plurality", 
-          "type": "part_of",
-          "confidence": 0.9,
-          "evidence": [
-            {
-              "text": "デジタル民主主義は、プラリティの実現手段の一つとして重要な役割を果たします。"
-            }
-          ]
-        }
-      ]
-    };
+    // Load actual graph data from public/graph.json
+    const publicGraphPath = path.join(__dirname, '..', 'public', 'graph.json');
+    let graphData;
+    
+    if (fs.existsSync(publicGraphPath)) {
+      try {
+        const graphContent = fs.readFileSync(publicGraphPath, 'utf-8');
+        graphData = JSON.parse(graphContent);
+        console.log('✅ Loaded actual graph data from public/graph.json');
+      } catch (error) {
+        console.error('❌ Error reading graph.json:', error);
+        graphData = { nodes: [], edges: [] };
+      }
+    } else {
+      console.warn('⚠️ No graph.json found in public/, using empty data');
+      graphData = { nodes: [], edges: [] };
+    }
 
-    // Write sample graph.json
+    // Write graph.json to dist
     const graphJsonPath = path.join(distPath, 'graph.json');
-    fs.writeFileSync(graphJsonPath, JSON.stringify(sampleGraphData, null, 2));
-    console.log('✅ Sample graph.json created in dist/');
+    fs.writeFileSync(graphJsonPath, JSON.stringify(graphData, null, 2));
+    console.log('✅ Graph.json copied to dist/');
 
     // Generate static viewer with embedded data
-    const staticHTML = generateStaticViewer(sampleGraphData);
+    const staticHTML = generateStaticViewer(graphData);
     const staticViewerPath = path.join(distPath, 'viewer_static.html');
     fs.writeFileSync(staticViewerPath, staticHTML);
     console.log('✅ Static viewer with embedded data created at dist/viewer_static.html');
