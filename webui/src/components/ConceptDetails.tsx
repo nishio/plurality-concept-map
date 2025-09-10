@@ -163,6 +163,33 @@ export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, d
           </div>
         )}
       </div>
+
+      {/* 概念リストセクション */}
+      {data && data.nodes.length > 0 && (
+        <div className="concept-list-section">
+          <div className="section-title">全ての概念</div>
+          <div className="concept-list">
+            {data.nodes
+              .sort((a, b) => {
+                // Core concepts first, then by label
+                const aTier = a.tier || 'core';
+                const bTier = b.tier || 'core';
+                if (aTier === 'core' && bTier !== 'core') return -1;
+                if (aTier !== 'core' && bTier === 'core') return 1;
+                return a.label.localeCompare(b.label, 'ja');
+              })
+              .map((node) => (
+                <div
+                  key={node.id}
+                  className={`concept-list-item ${node.id === concept.id ? 'selected' : ''} ${node.tier || 'core'}`}
+                  onClick={() => onConceptSelect && onConceptSelect(node)}
+                >
+                  <span className="concept-list-label">{node.label}</span>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

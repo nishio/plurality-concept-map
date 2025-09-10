@@ -461,13 +461,136 @@ input[type="checkbox"] {
   transform: translateY(-1px);
 }
 
+/* Concept List */
+.concept-list-section {
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.concept-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 12px;
+}
+
+.concept-list-item {
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background: var(--surface-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.concept-list-item:hover {
+  background: #e2e8f0;
+  border-color: var(--primary-color);
+  transform: translateX(4px);
+}
+
+.concept-list-item.selected {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.concept-list-item.selected:hover {
+  background: #1d4ed8;
+  transform: translateX(4px);
+}
+
+.concept-list-label {
+  flex: 1;
+  font-weight: 500;
+}
+
+.concept-list-badge {
+  padding: 2px 8px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.concept-list-item.selected .concept-list-badge {
+  background: white;
+  color: var(--primary-color);
+}
+
+.concept-list-item.supplementary {
+  opacity: 0.85;
+}
+
+.concept-list-item.contextual {
+  opacity: 0.7;
+}
+
+/* Scrollbar styling for concept list */
+.concept-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.concept-list::-webkit-scrollbar-track {
+  background: var(--surface-color);
+  border-radius: 3px;
+}
+
+.concept-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.concept-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+  }
+  
   #sidebar {
     width: 100%;
+    max-width: 100%;
     height: auto;
+    max-height: 60vh;
+    overflow-y: auto;
   }
+  
   #graph-container {
-    display: none;
+    height: 40vh;
+  }
+  
+  .zoom-controls {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .concept-list-section {
+    padding: 12px;
+    margin-top: 16px;
+  }
+
+  .concept-list {
+    max-height: 200px;
+  }
+
+  .concept-list-item {
+    padding: 8px 10px;
+    font-size: 13px;
   }
 }
 
