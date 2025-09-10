@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import * as d3 from 'd3';
 import { GraphData, Concept, Edge, D3Node, D3Link } from '../types';
 
@@ -10,32 +10,21 @@ interface D3GraphProps {
   selectedEdge?: Edge | null;
 }
 
-export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSelect, selectedConcept, selectedEdge }) => {
+export const D3Graph: React.FC<D3GraphProps> = ({ 
+  data, 
+  onNodeSelect, 
+  onEdgeSelect, 
+  selectedConcept, 
+  selectedEdge 
+}) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [hasUserSelected, setHasUserSelected] = useState(false);
-  const selectedNodeRef = useRef<D3Node | null>(null);
-  const hasUserSelectedRef = useRef(false);
+  const simulationRef = useRef<d3.Simulation<D3Node, D3Link> | null>(null);
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const transformRef = useRef<d3.ZoomTransform>(d3.zoomIdentity);
+  const tooltipRef = useRef<d3.Selection<HTMLDivElement, unknown, HTMLElement, any> | null>(null);
 
-  const onNodeSelectRef = useRef(onNodeSelect);
-  const onEdgeSelectRef = useRef(onEdgeSelect);
-
-  // Update refs when callbacks change
-  useEffect(() => {
-    onNodeSelectRef.current = onNodeSelect;
-    onEdgeSelectRef.current = onEdgeSelect;
-  }, [onNodeSelect, onEdgeSelect]);
-
-  const handleNodeSelect = useCallback((concept: Concept) => {
-    onNodeSelectRef.current(concept);
-  }, []);
-
-  const handleEdgeSelect = useCallback((edge: Edge) => {
-    onEdgeSelectRef.current(edge);
-  }, []);
-
+  // Process data into D3 format
   const processedData = useMemo(() => {
     const nodes: D3Node[] = data.nodes.map(d => ({ ...d }));
     const id2node = new Map(nodes.map(d => [d.id, d]));
@@ -44,167 +33,189 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
       source: id2node.get(e.source)!,
       target: id2node.get(e.target)!
     }));
-    return { nodes, links, id2node };
+    return { nodes, links };
   }, [data]);
 
-  // Helper function to update highlights
-  const updateHighlights = useCallback(() => {
-    if (!svgRef.current) return;
-
-    const svg = d3.select(svgRef.current);
-    const nodes = svg.selectAll('.node');
-    const links = svg.selectAll('.link');
-    const edgeLabels = svg.selectAll('.edge-label');
-
-    // Reset all highlights
-    nodes.classed('highlighted', false).classed('dimmed', false);
-    links.classed('highlighted', false).classed('dimmed', false);
-    edgeLabels.classed('highlighted', false).classed('dimmed', false);
-
-    if (selectedConcept) {
-      // Only highlight the selected concept node itself
-      nodes.classed('highlighted', (d: any) => d.id === selectedConcept.id)
-           .classed('dimmed', (d: any) => d.id !== selectedConcept.id);
-    } else if (selectedEdge) {
-      // Highlight selected edge and its nodes
-      const sourceId = typeof selectedEdge.source === 'string' ? selectedEdge.source : selectedEdge.source.id;
-      const targetId = typeof selectedEdge.target === 'string' ? selectedEdge.target : selectedEdge.target.id;
-      
-      nodes.classed('highlighted', (d: any) => d.id === sourceId || d.id === targetId)
-           .classed('dimmed', (d: any) => d.id !== sourceId && d.id !== targetId);
-      
-      links.classed('highlighted', (d: any) => 
-        (d.source.id === sourceId && d.target.id === targetId) ||
-        (d.source.id === targetId && d.target.id === sourceId))
-           .classed('dimmed', (d: any) => 
-        !((d.source.id === sourceId && d.target.id === targetId) ||
-          (d.source.id === targetId && d.target.id === sourceId)));
-      
-      edgeLabels.classed('highlighted', (d: any) => 
-        (d.source.id === sourceId && d.target.id === targetId) ||
-        (d.source.id === targetId && d.target.id === sourceId))
-                .classed('dimmed', (d: any) => 
-        !((d.source.id === sourceId && d.target.id === targetId) ||
-          (d.source.id === targetId && d.target.id === sourceId)));
+  // Initialize tooltip once
+  useEffect(() => {
+    if (!tooltipRef.current) {
+      tooltipRef.current = d3.select('body')
+        .append('div')
+        .attr('class', 'tooltip')
+        .style('display', 'none');
     }
-  }, [selectedConcept, selectedEdge, data]);
+    
+    return () => {
+      tooltipRef.current?.remove();
+      tooltipRef.current = null;
+    };
+  }, []);
 
+  // Main D3 graph setup and update
   useEffect(() => {
     if (!svgRef.current || !containerRef.current) return;
 
-    const container = d3.select(containerRef.current);
-    const containerRect = container.node()?.getBoundingClientRect();
-    if (!containerRect) return;
-
-    const width = containerRect.width;
-    const height = containerRect.height;
-
-    // Clear previous content
-    d3.select(svgRef.current).selectAll('*').remove();
-
+    const container = containerRef.current;
+    const { width, height } = container.getBoundingClientRect();
+    
     const svg = d3.select(svgRef.current)
       .attr('width', width)
       .attr('height', height);
 
-    const g = svg.append('g');
+    // Setup main group for zooming
+    let g = svg.select<SVGGElement>('g.main-group');
+    if (g.empty()) {
+      g = svg.append('g').attr('class', 'main-group');
+    }
 
+    // Setup zoom behavior
+    if (!zoomRef.current) {
+      zoomRef.current = d3.zoom<SVGSVGElement, unknown>()
+        .scaleExtent([0.3, 3])
+        .on('zoom', (event) => {
+          g.attr('transform', event.transform);
+          transformRef.current = event.transform;
+        });
+      
+      svg.call(zoomRef.current);
+      
+      // Restore previous transform if exists
+      if (transformRef.current.k !== 1 || transformRef.current.x !== 0 || transformRef.current.y !== 0) {
+        svg.call(zoomRef.current.transform, transformRef.current);
+      }
+    }
 
-    const linkG = g.append('g');
-    const labelG = g.append('g');
-    const nodeG = g.append('g');
+    // Setup groups
+    let linkG = g.select<SVGGElement>('g.links');
+    let labelG = g.select<SVGGElement>('g.labels');
+    let nodeG = g.select<SVGGElement>('g.nodes');
+    
+    if (linkG.empty()) linkG = g.append('g').attr('class', 'links');
+    if (labelG.empty()) labelG = g.append('g').attr('class', 'labels');
+    if (nodeG.empty()) nodeG = g.append('g').attr('class', 'nodes');
 
-    // Use processed data
     const { nodes, links } = processedData;
 
-    // Create elements
-    const link = linkG.selectAll('line')
-      .data(links)
-      .enter()
+    // Data binding with proper enter/update/exit pattern for links
+    const linkSelection = linkG.selectAll<SVGLineElement, D3Link>('line')
+      .data(links, d => `${(d.source as D3Node).id}-${(d.target as D3Node).id}`);
+
+    linkSelection.exit().remove();
+
+    const linkEnter = linkSelection.enter()
       .append('line')
       .attr('class', 'link');
 
-    const edgeLabel = labelG.selectAll('text')
-      .data(links)
-      .enter()
+    const linkUpdate = linkEnter.merge(linkSelection);
+
+    // Data binding for edge labels
+    const labelSelection = labelG.selectAll<SVGTextElement, D3Link>('text')
+      .data(links, d => `${(d.source as D3Node).id}-${(d.target as D3Node).id}`);
+
+    labelSelection.exit().remove();
+
+    const labelEnter = labelSelection.enter()
       .append('text')
       .attr('class', 'edge-label')
-      .text(d => d.relation || d.type)
       .style('cursor', 'pointer')
-      .on('click', function(event, d) {
+      .on('click', (event, d) => {
         event.stopPropagation();
-        hasUserSelectedRef.current = true;
-        setHasUserSelected(true); // Mark as user-selected
-        handleEdgeSelect(d);
+        onEdgeSelect(d);
       });
 
-    const node = nodeG.selectAll('g')
-      .data(nodes)
-      .enter()
+    const labelUpdate = labelEnter.merge(labelSelection)
+      .text(d => d.relation || d.type || '');
+
+    // Data binding for nodes
+    const nodeSelection = nodeG.selectAll<SVGGElement, D3Node>('g.node')
+      .data(nodes, d => d.id);
+
+    nodeSelection.exit().remove();
+
+    const nodeEnter = nodeSelection.enter()
       .append('g')
       .attr('class', d => `node ${d.tier || 'core'}`);
 
-    node.append('circle')
+    nodeEnter.append('circle')
       .attr('r', d => (d.tier === 'core' || !d.tier) ? 12 : (d.tier === 'supplementary' ? 10 : 8));
 
-    node.append('text')
+    nodeEnter.append('text')
       .attr('dx', 16)
-      .attr('dy', 4)
+      .attr('dy', 4);
+
+    const nodeUpdate = nodeEnter.merge(nodeSelection);
+    
+    // Update node text
+    nodeUpdate.select('text')
       .text(d => d.label);
 
-    // Tooltip
-    const tooltip = d3.select('body').append('div')
-      .attr('class', 'tooltip')
-      .style('display', 'none');
-
-    // Selection handling
-    const selectNode = function(event: any, d: D3Node) {
-      node.classed('selected', false);
-      selectedNodeRef.current = d;
-      d3.select(this as any).classed('selected', true);
-      handleNodeSelect(d);
-      if (event) {
-        hasUserSelectedRef.current = true;
-        setHasUserSelected(true); // Mark as user-selected if event exists
-      }
-    };
-
-    // Node interactions
-    node.on('click', selectNode)
+    // Setup node interactions
+    nodeUpdate
+      .style('cursor', 'pointer')
+      .on('click', (event, d) => {
+        event.stopPropagation();
+        onNodeSelect(d);
+      })
       .on('mouseover', (event, d) => {
-        if (selectedNodeRef.current !== d) {
-          tooltip.style('display', 'block')
+        if (tooltipRef.current && d.id !== selectedConcept?.id) {
+          tooltipRef.current
+            .style('display', 'block')
             .html(`<strong>${d.label}</strong><br/>${d.definition || ''}<br/><em>${d.tier || 'core'}</em>`);
         }
       })
       .on('mousemove', (event) => {
-        tooltip.style('left', (event.pageX + 10) + 'px')
-          .style('top', (event.pageY + 10) + 'px');
+        if (tooltipRef.current) {
+          tooltipRef.current
+            .style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY + 10) + 'px');
+        }
       })
-      .on('mouseout', () => tooltip.style('display', 'none'));
+      .on('mouseout', () => {
+        if (tooltipRef.current) {
+          tooltipRef.current.style('display', 'none');
+        }
+      });
 
-    // Simulation
-    const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(100).strength(0.5))
-      .force('charge', d3.forceManyBody().strength(-300))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(30));
+    // Setup or update simulation
+    if (!simulationRef.current) {
+      simulationRef.current = d3.forceSimulation<D3Node>(nodes)
+        .force('link', d3.forceLink<D3Node, D3Link>(links)
+          .id(d => d.id)
+          .distance(100)
+          .strength(0.5))
+        .force('charge', d3.forceManyBody().strength(-300))
+        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collision', d3.forceCollide().radius(30));
+    } else {
+      // Update existing simulation with new data
+      simulationRef.current.nodes(nodes);
+      const linkForce = simulationRef.current.force<d3.ForceLink<D3Node, D3Link>>('link');
+      if (linkForce) {
+        linkForce.links(links);
+      }
+      simulationRef.current.alpha(0.3).restart();
+    }
 
-    simulation.on('tick', () => {
-      link.attr('x1', (d: any) => d.source.x)
-          .attr('y1', (d: any) => d.source.y)
-          .attr('x2', (d: any) => d.target.x)
-          .attr('y2', (d: any) => d.target.y);
-          
-      edgeLabel.attr('x', (d: any) => (d.source.x + d.target.x) / 2)
-               .attr('y', (d: any) => (d.source.y + d.target.y) / 2 - 5);
-               
-      node.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+    // Update positions on tick
+    simulationRef.current.on('tick', () => {
+      linkUpdate
+        .attr('x1', d => (d.source as D3Node).x!)
+        .attr('y1', d => (d.source as D3Node).y!)
+        .attr('x2', d => (d.target as D3Node).x!)
+        .attr('y2', d => (d.target as D3Node).y!);
+
+      labelUpdate
+        .attr('x', d => ((d.source as D3Node).x! + (d.target as D3Node).x!) / 2)
+        .attr('y', d => ((d.source as D3Node).y! + (d.target as D3Node).y!) / 2 - 5);
+
+      nodeUpdate
+        .attr('transform', d => `translate(${d.x},${d.y})`);
     });
 
-    // Drag behavior
-    node.call(d3.drag<any, any>()
+    // Setup drag behavior
+    const drag = d3.drag<SVGGElement, D3Node>()
       .on('start', (event, d) => {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
+        if (!event.active) simulationRef.current?.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
       })
@@ -213,76 +224,109 @@ export const D3Graph: React.FC<D3GraphProps> = ({ data, onNodeSelect, onEdgeSele
         d.fy = event.y;
       })
       .on('end', (event, d) => {
-        if (!event.active) simulation.alphaTarget(0);
+        if (!event.active) simulationRef.current?.alphaTarget(0);
         d.fx = null;
         d.fy = null;
-      }));
-
-    // Zoom behavior
-    const zoom = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.3, 3])
-      .on('zoom', (event) => {
-        g.attr('transform', event.transform);
-        transformRef.current = event.transform; // Save transform state
       });
 
-    // Store zoom for zoom controls
-    zoomRef.current = zoom;
-    svg.call(zoom);
-    
-    // Restore previous transform state
-    if (transformRef.current && !transformRef.current.toString().includes('1,0,0,1,0,0')) {
-      svg.call(zoom.transform, transformRef.current);
-    }
+    nodeUpdate.call(drag);
 
-    // Auto-select first core concept (including nodes without tier) only if user hasn't made a selection
-    const firstCore = nodes.find(d => d.tier === 'core' || !d.tier);
-    if (firstCore && !hasUserSelectedRef.current) {
-      setTimeout(() => {
-        const firstCoreNode = node.filter(d => d === firstCore);
-        if (!firstCoreNode.empty()) {
-          selectNode.call(firstCoreNode.node(), null, firstCore);
-        }
-      }, 100);
-    }
-
-
-    // Apply initial highlights
-    updateHighlights();
-
-    // Cleanup tooltip on unmount
+    // Cleanup on unmount
     return () => {
-      tooltip.remove();
+      simulationRef.current?.stop();
     };
-  }, [processedData, updateHighlights]);
+  }, [processedData, onNodeSelect, onEdgeSelect]);
 
-  // Update highlights when selection changes
+  // Update highlights based on selection (props-driven)
   useEffect(() => {
-    updateHighlights();
-  }, [updateHighlights]);
+    if (!svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    const nodes = svg.selectAll<SVGGElement, D3Node>('g.node');
+    const links = svg.selectAll<SVGLineElement, D3Link>('.link');
+    const labels = svg.selectAll<SVGTextElement, D3Link>('.edge-label');
+
+    // Reset all styles
+    nodes.classed('highlighted', false).classed('dimmed', false).classed('selected', false);
+    links.classed('highlighted', false).classed('dimmed', false);
+    labels.classed('highlighted', false).classed('dimmed', false);
+
+    if (selectedConcept) {
+      // Highlight selected concept
+      nodes
+        .classed('selected', d => d.id === selectedConcept.id)
+        .classed('highlighted', d => d.id === selectedConcept.id)
+        .classed('dimmed', d => d.id !== selectedConcept.id);
+        
+    } else if (selectedEdge) {
+      // Highlight selected edge and its connected nodes
+      const sourceId = typeof selectedEdge.source === 'string' 
+        ? selectedEdge.source 
+        : (selectedEdge.source as D3Node).id;
+      const targetId = typeof selectedEdge.target === 'string' 
+        ? selectedEdge.target 
+        : (selectedEdge.target as D3Node).id;
+
+      nodes
+        .classed('highlighted', d => d.id === sourceId || d.id === targetId)
+        .classed('dimmed', d => d.id !== sourceId && d.id !== targetId);
+
+      links
+        .classed('highlighted', d => {
+          const linkSourceId = (d.source as D3Node).id;
+          const linkTargetId = (d.target as D3Node).id;
+          return (linkSourceId === sourceId && linkTargetId === targetId) ||
+                 (linkSourceId === targetId && linkTargetId === sourceId);
+        })
+        .classed('dimmed', d => {
+          const linkSourceId = (d.source as D3Node).id;
+          const linkTargetId = (d.target as D3Node).id;
+          return !((linkSourceId === sourceId && linkTargetId === targetId) ||
+                   (linkSourceId === targetId && linkTargetId === sourceId));
+        });
+
+      labels
+        .classed('highlighted', d => {
+          const linkSourceId = (d.source as D3Node).id;
+          const linkTargetId = (d.target as D3Node).id;
+          return (linkSourceId === sourceId && linkTargetId === targetId) ||
+                 (linkSourceId === targetId && linkTargetId === sourceId);
+        })
+        .classed('dimmed', d => {
+          const linkSourceId = (d.source as D3Node).id;
+          const linkTargetId = (d.target as D3Node).id;
+          return !((linkSourceId === sourceId && linkTargetId === targetId) ||
+                   (linkSourceId === targetId && linkTargetId === sourceId));
+        });
+    }
+  }, [selectedConcept, selectedEdge]);
+
+  // Handle zoom controls
+  const handleZoomIn = useCallback(() => {
+    if (svgRef.current && zoomRef.current) {
+      d3.select(svgRef.current).transition().call(zoomRef.current.scaleBy, 1.5);
+    }
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    if (svgRef.current && zoomRef.current) {
+      d3.select(svgRef.current).transition().call(zoomRef.current.scaleBy, 0.67);
+    }
+  }, []);
+
+  const handleZoomReset = useCallback(() => {
+    if (svgRef.current && zoomRef.current) {
+      d3.select(svgRef.current).transition().call(zoomRef.current.transform, d3.zoomIdentity);
+    }
+  }, []);
 
   return (
     <div ref={containerRef} id="graph-container">
       <svg ref={svgRef} id="graph"></svg>
       <div className="zoom-controls">
-        <div className="zoom-btn" onClick={() => {
-          const svg = d3.select(svgRef.current!);
-          if (zoomRef.current) {
-            svg.transition().call(zoomRef.current.scaleBy, 1.5);
-          }
-        }}>+</div>
-        <div className="zoom-btn" onClick={() => {
-          const svg = d3.select(svgRef.current!);
-          if (zoomRef.current) {
-            svg.transition().call(zoomRef.current.scaleBy, 0.67);
-          }
-        }}>−</div>
-        <div className="zoom-btn" style={{ fontSize: '12px' }} onClick={() => {
-          const svg = d3.select(svgRef.current!);
-          if (zoomRef.current) {
-            svg.transition().call(zoomRef.current.transform, d3.zoomIdentity);
-          }
-        }}>⌂</div>
+        <div className="zoom-btn" onClick={handleZoomIn}>+</div>
+        <div className="zoom-btn" onClick={handleZoomOut}>−</div>
+        <div className="zoom-btn" style={{ fontSize: '12px' }} onClick={handleZoomReset}>⌂</div>
       </div>
     </div>
   );

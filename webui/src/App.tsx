@@ -45,6 +45,13 @@ function App() {
         const graphData = await loadGraphData('sec1-0');
         if (graphData.nodes.length > 0) {
           setData(graphData);
+          // Auto-select first core concept on initial load
+          if (!selectedConcept && !selectedEdge) {
+            const firstCore = graphData.nodes.find(n => n.tier === 'core' || !n.tier);
+            if (firstCore) {
+              setSelectedConcept(firstCore);
+            }
+          }
         }
       } catch (error) {
         console.warn('Using sample data due to error:', error);
