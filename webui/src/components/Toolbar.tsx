@@ -7,6 +7,7 @@ interface ToolbarProps {
 
 export const Toolbar: React.FC<ToolbarProps> = ({ selectedSection, onSectionChange }) => {
   const sections = [
+    { value: 'merged', label: '【全章統合】全体マップ' },
     { value: 'sec0-2', label: '0-2 自分の道を見つける' },
     { value: 'sec1-0', label: '1-0 多元性を見る' },
     { value: 'sec2-0', label: '2-0 ITと民主主義 拡大する溝' },

@@ -75,7 +75,7 @@ function App() {
     <div id="app">
       <div id="sidebar">
         <Toolbar selectedSection={selectedSection} onSectionChange={handleSectionChange} />
-        <ConceptDetails concept={selectedConcept} edge={selectedEdge} data={data} onConceptSelect={handleNodeSelect} onEdgeSelect={handleEdgeSelect} />
+        <ConceptDetails concept={selectedConcept} edge={selectedEdge} data={data} onConceptSelect={handleNodeSelect} onEdgeSelect={handleEdgeSelect} onSectionChange={handleSectionChange} />
       </div>
       
       <D3Graph 

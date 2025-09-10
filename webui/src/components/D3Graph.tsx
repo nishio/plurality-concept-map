@@ -104,7 +104,7 @@ export const D3Graph: React.FC<D3GraphProps> = ({
 
     const linkEnter = linkSelection.enter()
       .append('line')
-      .attr('class', 'link');
+      .attr('class', d => d.cross_chapter ? 'link cross-chapter' : 'link');
 
     const linkUpdate = linkEnter.merge(linkSelection);
 
@@ -137,7 +137,12 @@ export const D3Graph: React.FC<D3GraphProps> = ({
       .attr('class', d => `node ${d.tier || 'core'}`);
 
     nodeEnter.append('circle')
-      .attr('r', d => (d.tier === 'core' || !d.tier) ? 12 : (d.tier === 'supplementary' ? 10 : 8));
+      .attr('r', d => {
+        if (d.tier === 'core' || !d.tier) return 12;
+        if (d.tier === 'supplementary') return 10;
+        if (d.tier === 'external') return 10;
+        return 8;
+      });
 
     nodeEnter.append('text')
       .attr('dx', 16)

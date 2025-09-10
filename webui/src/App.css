@@ -4,6 +4,7 @@
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --danger-color: #ef4444;
+  --external-color: #8b5cf6;
   --bg-color: #ffffff;
   --surface-color: #f8fafc;
   --border-color: #e2e8f0;
@@ -301,6 +302,74 @@ input[type="checkbox"] {
   font-size: 11px;
 }
 
+.external-reference {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.section-label {
+  background: var(--external-color);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.confidence-badge {
+  background: var(--secondary-color);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+.cross-chapter-label {
+  font-size: 11px;
+  color: var(--external-color);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.relation-item.cross-chapter {
+  border-left: 3px solid var(--external-color);
+  padding-left: 8px;
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.tier-external {
+  background: var(--external-color) !important;
+  color: white !important;
+}
+
+.external-section-link {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.section-link-button {
+  width: 100%;
+  background: var(--external-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.section-link-button:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
 #graph-container {
   flex: 1;
   position: relative;
@@ -329,6 +398,11 @@ input[type="checkbox"] {
 .node.advanced circle { 
   fill: var(--warning-color); 
   stroke: #d97706; 
+}
+.node.external circle {
+  fill: var(--external-color);
+  stroke: #7c3aed;
+  stroke-dasharray: 3 2;
 }
 .node text { 
   font-size: 12px; 
@@ -372,6 +446,19 @@ input[type="checkbox"] {
 .link.selected { 
   stroke: var(--primary-color); 
   stroke-opacity: 0.8; 
+  stroke-width: 3px;
+}
+
+.link.cross-chapter {
+  stroke: var(--external-color);
+  stroke-opacity: 0.8;
+  stroke-dasharray: 5 3;
+  stroke-width: 2px;
+}
+
+.link.cross-chapter.selected {
+  stroke: var(--external-color);
+  stroke-opacity: 1.0;
   stroke-width: 3px;
 }
 

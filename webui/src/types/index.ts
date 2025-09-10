@@ -7,9 +7,15 @@ export interface Concept {
   id: string;
   label: string;
   definition: string;
-  tier: 'core' | 'supplementary' | 'advanced';
+  tier: 'core' | 'supplementary' | 'advanced' | 'external';
   aliases: string[];
   evidence: Evidence[];
+  external_reference?: {
+    section: string;
+    original_concept: string;
+    confidence: number;
+    pattern?: number;
+  };
 }
 
 export interface Edge {
@@ -20,6 +26,8 @@ export interface Edge {
   relation_description?: string; // Full natural language description
   confidence: number;
   evidence: Evidence[];
+  cross_chapter?: boolean;
+  target_section?: string;
 }
 
 export interface GraphData {
@@ -43,4 +51,5 @@ export type TierFilter = {
   core: boolean;
   supplementary: boolean;
   advanced: boolean;
+  external: boolean;
 };

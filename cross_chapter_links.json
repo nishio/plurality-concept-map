@@ -1,0 +1,323 @@
+{
+"cross_chapter_links": [
+{
+"source_section": "3-0",
+"source_concept": "プルラリティ（多元性）",
+"target_section": "4-2",
+"target_concept": "⿻公衆",
+"relation": "理論→制度",
+"relation_description": "多元性の原理を、公衆が形成する制度的単位として具現化。",
+"confidence": 0.92,
+"pattern": 1
+},
+{
+"source_section": "3-0",
+"source_concept": "プルラリティ（多元性）",
+"target_section": "5-0",
+"target_concept": "⿻社会プロトコル",
+"relation": "理論→技術",
+"relation_description": "多元性を支える相互運用プロトコル設計へ落とし込む。",
+"confidence": 0.90,
+"pattern": 2
+},
+{
+"source_section": "3-0",
+"source_concept": "プルラリティ（多元性）",
+"target_section": "6-0",
+"target_concept": "⿻",
+"relation": "理論→応用",
+"relation_description": "章全体の応用編で多元性の合意形成と展開の旗印となる。",
+"confidence": 0.89,
+"pattern": 1
+},
+{
+"source_section": "3-1",
+"source_concept": "複雑系（複雑性）",
+"target_section": "5-0",
+"target_concept": "スーパーモジュラリティ",
+"relation": "理論→技術",
+"relation_description": "相互補強的相互作用の理論が協働テクノロジー設計の中核仮定に。",
+"confidence": 0.88,
+"pattern": 2
+},
+{
+"source_section": "3-1",
+"source_concept": "関係性／ネットワーク社会学",
+"target_section": "4-2",
+"target_concept": "団体（アソシエーション）",
+"relation": "理論→制度",
+"relation_description": "関係性の単位として団体を権利設計の基本構成要素に位置づける。",
+"confidence": 0.86,
+"pattern": 2
+},
+{
+"source_section": "3-2",
+"source_concept": "アイデンティティ／ID",
+"target_section": "4-1",
+"target_concept": "デジタルID",
+"relation": "理論→制度",
+"relation_description": "IDの概念的課題を、確立と保護を両立する制度設計へ。",
+"confidence": 0.93,
+"pattern": 2
+},
+{
+"source_section": "4-1",
+"source_concept": "デジタルID",
+"target_section": "6-3",
+"target_concept": "暗号的に安全な情報源",
+"relation": "技術→応用",
+"relation_description": "発行者検証や署名により取材源の真正性・安全性を支える。",
+"confidence": 0.87,
+"pattern": 4
+},
+{
+"source_section": "4-1",
+"source_concept": "検証可能な資格情報（VC）",
+"target_section": "6-2",
+"target_concept": "GFMによる診断支援とデータ共有",
+"relation": "技術→応用",
+"relation_description": "VCで同意・属性を担保しつつ医療データ共有を安全に運用。",
+"confidence": 0.86,
+"pattern": 4
+},
+{
+"source_section": "3-3",
+"source_concept": "RFC（Request for Comments）プロセス",
+"target_section": "4-0",
+"target_concept": "オペレーティングシステム（OS）",
+"relation": "理論→制度",
+"relation_description": "オープン標準の協働様式が権利OSの設計原則（相互運用・ダイナミズム）に通じる。",
+"confidence": 0.84,
+"pattern": 2
+},
+{
+"source_section": "3-3",
+"source_concept": "ハイパーテキスト",
+"target_section": "0-2",
+"target_concept": "非線形読書とハイパーリンク",
+"relation": "技術→応用",
+"relation_description": "ハイパーテキストの理念が本書の読書設計（円環・リンク）に反映。",
+"confidence": 0.90,
+"pattern": 4
+},
+{
+"source_section": "2-2",
+"source_concept": "Polis（意見クラスタリング）",
+"target_section": "5-4",
+"target_concept": "Polis（集合応答システム）",
+"relation": "事例→技術",
+"relation_description": "台湾での実運用を踏まえ、拡張熟議の一般化された設計要素に。",
+"confidence": 0.95,
+"pattern": 3
+},
+{
+"source_section": "2-2",
+"source_concept": "零時政府（g0v）",
+"target_section": "7-0",
+"target_concept": "オープンソースと市民社会の協力",
+"relation": "事例→制度",
+"relation_description": "草の根の協働実践が公的投資と市民協働の政策枠組みへ昇華。",
+"confidence": 0.92,
+"pattern": 3
+},
+{
+"source_section": "2-1",
+"source_concept": "デジタル民主主義",
+"target_section": "7-1",
+"target_concept": "デジタル民主主義",
+"relation": "理論→結語",
+"relation_description": "序盤の定義が結語での行動指針・戦略として再定義される。",
+"confidence": 0.90,
+"pattern": 1
+},
+{
+"source_section": "2-0",
+"source_concept": "監視資本主義",
+"target_section": "4-2",
+"target_concept": "暗号技術とプライバシー強化技術（PET）",
+"relation": "対立→対策",
+"relation_description": "越境的データ収奪に対し、PETで文脈と最小化の原則を実装。",
+"confidence": 0.91,
+"pattern": 5
+},
+{
+"source_section": "2-0",
+"source_concept": "中央集権的脅威",
+"target_section": "4-2",
+"target_concept": "分散型台帳技術（DLT）／ブロックチェーン",
+"relation": "対立→対策",
+"relation_description": "単一障害点のリスクに対し、耐改竄・分散合意で対抗。",
+"confidence": 0.90,
+"pattern": 5
+},
+{
+"source_section": "4-3",
+"source_concept": "コンテキストの完全性（プライバシー）",
+"target_section": "6-3",
+"target_concept": "偽のコンセンサスと⿻主義的無知",
+"relation": "技術→応用",
+"relation_description": "文脈保護は誤情報の同調圧力を緩和し健全な合意形成を助ける。",
+"confidence": 0.83,
+"pattern": 4
+},
+{
+"source_section": "4-5",
+"source_concept": "情報の完全性",
+"target_section": "6-3",
+"target_concept": "報道責任（ハッチンズ委員会）",
+"relation": "インフラ→規範",
+"relation_description": "完全性を担保するインフラが報道倫理・説明責任の実効性を底上げ。",
+"confidence": 0.82,
+"pattern": 4
+},
+{
+"source_section": "5-6",
+"source_concept": "クアドラティック投票",
+"target_section": "2-2",
+"target_concept": "クアドラティック投票",
+"relation": "技術→事例",
+"relation_description": "制度設計としてのQVが台湾の実践例と往還し妥当性を強化。",
+"confidence": 0.94,
+"pattern": 3
+},
+{
+"source_section": "5-7",
+"source_concept": "公共財",
+"target_section": "7-0",
+"target_concept": "デジタル公共インフラ",
+"relation": "概念→政策",
+"relation_description": "公共財の資金配分論が国家レベルのデジタル基盤投資へ接続。",
+"confidence": 0.88,
+"pattern": 2
+},
+{
+"source_section": "5-3",
+"source_concept": "オープンソースプロジェクト",
+"target_section": "7-0",
+"target_concept": "オープンソースと市民社会の協力",
+"relation": "技術→制度",
+"relation_description": "分散協働の実務が政府‐市民の協働モデルの前提となる。",
+"confidence": 0.87,
+"pattern": 2
+},
+{
+"source_section": "5-1",
+"source_concept": "生成基盤モデル（GFM）",
+"target_section": "5-4",
+"target_concept": "GFM（生成基盤モデル）と拡張熟議",
+"relation": "技術→応用",
+"relation_description": "GFMが論点抽出・意見要約を支援し熟議の帯域を拡張。",
+"confidence": 0.93,
+"pattern": 4
+},
+{
+"source_section": "5-1",
+"source_concept": "神経インターフェース",
+"target_section": "6-2",
+"target_concept": "ポスト表象コミュニケーション（BCI・ISR）",
+"relation": "技術→応用",
+"relation_description": "非言語チャネルが医療現場の合意・ケア設計を補助。",
+"confidence": 0.82,
+"pattern": 2
+},
+{
+"source_section": "5-2",
+"source_concept": "アクセシビリティと包摂性",
+"target_section": "6-5",
+"target_concept": "協働的学習ネットワーク",
+"relation": "技術→応用",
+"relation_description": "包摂設計の原則が生涯学習の協働ネットワークに継承。",
+"confidence": 0.86,
+"pattern": 2
+},
+{
+"source_section": "4-4",
+"source_concept": "データの集団性とガバナンス",
+"target_section": "6-4",
+"target_concept": "データ連合",
+"relation": "技術→応用",
+"relation_description": "共同統治の設計思想が環境分野の連合型データ管理に具体化。",
+"confidence": 0.90,
+"pattern": 4
+},
+{
+"source_section": "3-2",
+"source_concept": "市場の失敗とスーパーモジュラリティ",
+"target_section": "5-7",
+"target_concept": "スーパーモジュラリティと収穫逓増",
+"relation": "理論→技術",
+"relation_description": "理論的含意が公共財・資金配分メカニズム設計の根拠に。",
+"confidence": 0.88,
+"pattern": 2
+},
+{
+"source_section": "2-1",
+"source_concept": "半導体と輸出指向経済",
+"target_section": "7-0",
+"target_concept": "産業政策と競争政策の統合",
+"relation": "事例→政策",
+"relation_description": "台湾の産業基盤の歴史が政策統合の実務的要件を示す。",
+"confidence": 0.85,
+"pattern": 3
+},
+{
+"source_section": "1-0",
+"source_concept": "デジタル技術",
+"target_section": "4-5",
+"target_concept": "デジタルインフラ",
+"relation": "理論→技術",
+"relation_description": "抽象的言及を、アクセス・完全性・耐性を備えた基盤設計へ。",
+"confidence": 0.83,
+"pattern": 2
+},
+{
+"source_section": "1-0",
+"source_concept": "分断／ポラリゼーション",
+"target_section": "5-4",
+"target_concept": "橋渡しシステム",
+"relation": "課題→解決",
+"relation_description": "社会分断の課題に対し、橋渡し設計で共有地帯を創出。",
+"confidence": 0.92,
+"pattern": 2
+},
+{
+"source_section": "2-0",
+"source_concept": "民主主義のITへの敵意",
+"target_section": "7-1",
+"target_concept": "技術の方向性の選択",
+"relation": "対立→対策",
+"relation_description": "敵意を和らげるには、技術の方向づけを民主的正当性と結合。",
+"confidence": 0.84,
+"pattern": 5
+},
+{
+"source_section": "4-0",
+"source_concept": "ハイパーグラフ",
+"target_section": "5-0",
+"target_concept": "⿻社会プロトコル",
+"relation": "データ構造→プロトコル",
+"relation_description": "多関係を扱うデータ構造が多元協働のプロトコル表現に適合。",
+"confidence": 0.85,
+"pattern": 4
+}
+],
+"summary": {
+"total_links": 30,
+"key_bridge_concepts": [
+"プルラリティ（多元性）",
+"デジタル民主主義",
+"デジタル公共インフラ",
+"デジタルID",
+"検証可能な資格情報（VC）",
+"分散型台帳技術（DLT）",
+"スーパーモジュラリティ",
+"Polis",
+"クアドラティック投票",
+"コンテキストの完全性（プライバシー）",
+"情報の完全性",
+"⿻社会プロトコル",
+"データの集団性とガバナンス"
+],
+"network_insights": "3章の理論（プルラリティ／複雑系／ID）が4章の権利OSへ、さらに5章の協働技術に実装され、6章の分野別応用に流れる有向径が主動脈。2章（台湾の山・日常）の実例ノードは5章・7章の制度／政策ノードに多重辺で接続し、抽象と具体の往還を形成。GFM・DLT・VC・Polisは跨章ハブとしてボトルネックを緩和し、分断→橋渡し→合意の経路を短縮する。"
+}
+}

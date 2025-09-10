@@ -1,5 +1,6 @@
 import React from 'react';
 import { Concept, Edge, GraphData } from '../types';
+import { getSectionLabel } from '../utils/crossChapterLinks';
 
 interface ConceptDetailsProps {
   concept: Concept | null;
@@ -7,9 +8,10 @@ interface ConceptDetailsProps {
   data?: GraphData;
   onConceptSelect?: (concept: Concept) => void;
   onEdgeSelect?: (edge: Edge) => void;
+  onSectionChange?: (section: string) => void;
 }
 
-export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, data, onConceptSelect, onEdgeSelect }) => {
+export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, data, onConceptSelect, onEdgeSelect, onSectionChange }) => {
   if (!concept && !edge) {
     return (
       <div id="details">
@@ -98,7 +100,9 @@ export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, d
     <div id="details">
       <div className="concept-card">
         <div className="concept-header">
-          <span className="concept-tier tier-concept">概念</span>
+          <span className={`concept-tier tier-${concept.tier || 'core'}`}>
+            {concept.tier === 'external' ? '他章の概念' : '概念'}
+          </span>
           <h2 className="concept-title">{concept.label}</h2>
         </div>
         
@@ -152,14 +156,31 @@ export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, d
                   return (
                     <div 
                       key={index} 
-                      className="relation-item clickable"
+                      className={`relation-item clickable ${edge.cross_chapter ? 'cross-chapter' : ''}`}
                       onClick={() => onEdgeSelect && onEdgeSelect(edge)}
                     >
                       <div className="relation-description">{relationDescription}</div>
+                      {edge.cross_chapter && edge.target_section && (
+                        <div className="cross-chapter-label">
+                          → {getSectionLabel(edge.target_section)}
+                        </div>
+                      )}
                     </div>
                   );
                 })}
             </div>
+          </div>
+        )}
+
+        {/* 他章の概念の場合、セクションリンクを表示 */}
+        {concept.external_reference && onSectionChange && (
+          <div className="external-section-link">
+            <button 
+              className="section-link-button"
+              onClick={() => onSectionChange(`sec${concept.external_reference?.section}`)}
+            >
+              → {concept.external_reference.section} {getSectionLabel(concept.external_reference.section).split(' ').slice(1).join(' ')}
+            </button>
           </div>
         )}
       </div>
