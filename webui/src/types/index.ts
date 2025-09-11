@@ -1,6 +1,7 @@
 export interface Evidence {
   text: string;
   section?: string;
+  source_url?: string;
 }
 
 export interface Concept {
@@ -33,6 +34,10 @@ export interface Edge {
 export interface GraphData {
   nodes: Concept[];
   edges: Edge[];
+  metadata?: {
+    source_base_url?: string;
+    [key: string]: any;
+  };
 }
 
 export interface D3Node extends Concept {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Concept, Edge, GraphData } from '../types';
 import { getSectionLabel } from '../utils/crossChapterLinks';
+import { getSourceUrl, getCurrentSectionId } from '../utils/sourceLinks';
 
 interface ConceptDetailsProps {
   concept: Concept | null;
@@ -9,9 +10,10 @@ interface ConceptDetailsProps {
   onConceptSelect?: (concept: Concept) => void;
   onEdgeSelect?: (edge: Edge) => void;
   onSectionChange?: (section: string) => void;
+  currentSection?: string;
 }
 
-export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, data, onConceptSelect, onEdgeSelect, onSectionChange }) => {
+export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, data, onConceptSelect, onEdgeSelect, onSectionChange, currentSection }) => {
   if (!concept && !edge) {
     return (
       <div id="details">
@@ -74,9 +76,35 @@ export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, d
             {edge.evidence && edge.evidence.length > 0 && (
               <div className="evidence-section">
                 <div className="section-title">根拠・引用</div>
-                {edge.evidence.map((e, index) => (
-                  <div key={index} className="evidence-item">{e?.text || '証拠なし'}</div>
-                ))}
+                {edge.evidence.map((e, index) => {
+                  const sectionId = e?.section || currentSection || '';
+                  const sourceUrl = e ? getSourceUrl(
+                    sectionId,
+                    e,
+                    data?.metadata?.source_base_url
+                  ) : null;
+                  
+                  return (
+                    <div key={index} className="evidence-item">
+                      {e?.text || '証拠なし'}
+                      {sourceUrl && (
+                        <a 
+                          href={sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="evidence-source-icon"
+                          title="原文を開く"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -122,9 +150,35 @@ export const ConceptDetails: React.FC<ConceptDetailsProps> = ({ concept, edge, d
         {evidence.length > 0 && (
           <div className="evidence-section">
             <div className="section-title">根拠・引用</div>
-            {evidence.map((e, index) => (
-              <div key={index} className="evidence-item">{e.text}</div>
-            ))}
+            {evidence.map((e, index) => {
+              const sectionId = e.section || currentSection || '';
+              const sourceUrl = getSourceUrl(
+                sectionId,
+                e,
+                data?.metadata?.source_base_url
+              );
+              
+              return (
+                <div key={index} className="evidence-item">
+                  {e.text}
+                  {sourceUrl && (
+                    <a 
+                      href={sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="evidence-source-icon"
+                      title="原文を開く"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 

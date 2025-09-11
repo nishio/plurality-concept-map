@@ -112,6 +112,75 @@ OPENAI_MODEL=gpt-4o-mini                  # オプション、モデル設定
 - `nodes.csv`: 概念リスト（ID、ラベル、定義、エイリアス、証拠）
 - `edges.csv`: 関係リスト（source、target、relation、relation_description、confidence、evidence）
 - `mermaid.md`: Mermaidダイアグラム記法
+- `cross_chapter_links.json`: 章間の概念関連を記録（章間リンク機能用）
+
+### グラフデータスキーマ (graph.json)
+
+**トップレベル構造:**
+```json
+{
+  "nodes": [...],           // 概念ノードの配列
+  "edges": [...],           // 関係エッジの配列
+  "metadata": {...},        // 生成メタデータ
+  "sections": [...],        // セクション情報の配列
+  "cross_chapter_links": {...}  // 章間リンク情報（オプション）
+}
+```
+
+**Nodeオブジェクト:**
+```json
+{
+  "id": "string",           // 一意識別子（例: "plurality_多元性"）
+  "label": "string",        // 表示ラベル（例: "プルラリティ（多元性）"）
+  "definition": "string",   // 概念の定義
+  "aliases": ["string"],    // 別名のリスト
+  "evidence": ["string"],   // ソーステキストからの証拠引用
+  "section_id": "string"    // 所属セクションID（例: "0-0"）
+}
+```
+
+**Edgeオブジェクト:**
+```json
+{
+  "source": "string",              // ソースノードID
+  "target": "string",              // ターゲットノードID
+  "relation": "string",            // 短い関係ラベル（1-3語）
+  "relation_description": "string", // 詳細な関係説明
+  "confidence": 0.0-1.0,           // 信頼度スコア
+  "evidence": ["string"]           // 関係を支持する証拠引用
+}
+```
+
+**Metadataオブジェクト:**
+```json
+{
+  "generated_at": "ISO 8601 timestamp",
+  "model": "string",               // 使用したLLMモデル
+  "max_concepts": number,          // セクションあたり最大概念数
+  "cross_section": boolean,        // セクション間分析の有無
+  "segment_level": "string"        // セクション分割レベル（h1/h2/h3）
+}
+```
+
+**Sectionオブジェクト:**
+```json
+{
+  "id": "string",          // セクションID（例: "0-0"）
+  "chapter": number,       // 章番号
+  "title": "string",       // セクションタイトル
+  "content": "string"      // セクション本文（オプション）
+}
+```
+
+**CrossChapterLinksオブジェクト:**
+```json
+{
+  "概念名": {
+    "chapters": [number],     // 概念が出現する章番号のリスト
+    "node_ids": ["string"]    // 各章でのノードIDのリスト
+  }
+}
+```
 
 ### ビューアーファイル
 - `viewer.html`: シンプル可視化用基本ビューア
