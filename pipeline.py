@@ -247,21 +247,7 @@ def main():
     lines.append("```")
     Path(args.out,"mermaid.md").write_text("\n".join(lines), encoding="utf-8")
 
-    # Generate both viewers
-    viewer = (Path(__file__).parent / "viewer.html").read_text(encoding="utf-8")
-    viewer = viewer.replace("/*__GRAPH_JSON__*/", json.dumps(graph, ensure_ascii=False))
-    Path(args.out,"viewer.html").write_text(viewer, encoding="utf-8")
-    
-    # Enhanced viewer (use regular viewer.html as fallback)
-    try:
-        enhanced_viewer_path = Path(__file__).parent / "viewer_enhanced.html"
-        if not enhanced_viewer_path.exists():
-            enhanced_viewer_path = Path(__file__).parent / "viewer.html"
-        enhanced_viewer = enhanced_viewer_path.read_text(encoding="utf-8")
-        enhanced_viewer = enhanced_viewer.replace("/*__GRAPH_JSON__*/", json.dumps(graph, ensure_ascii=False))
-        Path(args.out,"viewer_enhanced.html").write_text(enhanced_viewer, encoding="utf-8")
-    except Exception as e:
-        print(f"Warning: Could not create enhanced viewer: {e}")
+    # Skip viewer generation as requested
 
     print(f"Done. Outputs saved under: {args.out}")
 

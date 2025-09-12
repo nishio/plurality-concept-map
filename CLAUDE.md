@@ -339,3 +339,189 @@ python create_graph_fix_prompt.py --section-id 1-0 --output fix_prompt_1-0.txt
 ツールは以下の場所からファイルを自動検索：
 - Markdownファイル: `./input/`
 - グラフファイル: `./webui/public/`
+
+## ソースジャンプ機能（原文リンク）
+
+### 概要
+証拠項目から原文へ直接ジャンプできるインライン機能。テキストフラグメントAPIを使用して正確な引用箇所への遷移を実現。
+
+### 実装アーキテクチャ
+
+**コアファイル:**
+- `webui/src/utils/sourceLinks.ts`: URL生成とテキストフラグメント作成
+- `webui/src/components/ConceptDetails.tsx`: インラインアイコン表示
+- `webui/src/types/index.ts`: Evidence型にsource_url、GraphData型にmetadata追加
+
+**URL生成ロジック:**
+```typescript
+// デフォルト: Plurality.net chapters
+const baseUrl = 'https://www.plurality.net/v/chapters';
+const chapterUrl = `${baseUrl}/${sectionId}/jpn/`;
+
+// テキストフラグメント付き
+const url = `${chapterUrl}#:~:text=${encodedText}`;
+```
+
+### テキストフラグメント生成
+
+**短いテキスト（～100文字）:**
+```typescript
+const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+return encodeURIComponent(escaped);
+```
+
+**長いテキスト（100文字超）:**
+```typescript
+const startWords = words.slice(0, 5).join(' ');
+const endWords = words.slice(-5).join(' ');
+return `${encodeURIComponent(startWords)},${encodeURIComponent(endWords)}`;
+```
+
+### URL特別マッピング
+
+**Plurality.netの構造対応:**
+```typescript
+// 1-0セクションは特別にURLパス「1」を使用
+let urlPath = normalizedSection;
+if (normalizedSection === '1-0') {
+  urlPath = '1';
+}
+```
+
+**理由:** `https://www.plurality.net/v/chapters/1-0/jpn/` は404、`/1/jpn/` が正解
+
+### UI設計原則
+
+**インライン表示:**
+- 大きなボタンではなく小さなアイコンで場所を節約
+- 文章の末尾に `margin-left: 6px` で自然に配置
+- `vertical-align: baseline` でベースライン揃え
+
+**視覚的配慮:**
+- 初期透明度: `opacity: 0.7`（目立ちすぎないよう）
+- ホバー時: `opacity: 1.0` + `translateY(-1px)`
+- アイコンサイズ: 12x12px（テキストと調和）
+
+### 拡張性対応
+
+**カスタムベースURL:**
+```typescript
+// graph.jsonのmetadataでカスタムURL指定可能
+{
+  "nodes": [...],
+  "edges": [...],
+  "metadata": {
+    "source_base_url": "https://custom-domain.com/chapters"
+  }
+}
+```
+
+**Evidence型の拡張:**
+```typescript
+interface Evidence {
+  text: string;
+  section?: string;
+  source_url?: string;  // 個別URL指定可能
+}
+```
+
+### 技術的ノウハウ
+
+**テキストフラグメント最適化:**
+- 日本語テキストの正確なURLエンコーディング
+- 長い引用文の開始/終了抽出で検索精度向上
+- 正規表現特殊文字のエスケープ処理
+
+**React統合:**
+- コンポーネント間でのsection情報伝播
+- props drilling回避（currentSection をConceptDetailsに直接渡す）
+- TypeScript型安全性の維持
+
+**デバッグ手法:**
+```bash
+# URL存在確認
+curl -I "https://www.plurality.net/v/chapters/1-0/jpn/" # 404
+curl -I "https://www.plurality.net/v/chapters/1/jpn/"   # 200
+```
+
+### 運用上の注意点
+
+1. **Text Fragments API対応**: Chrome 80+、Firefox未対応（フォールバック: ページトップに遷移）
+2. **外部リンク**: `target="_blank"` + `rel="noopener noreferrer"` でセキュリティ対策
+3. **エラー処理**: URLが存在しない場合は静かに非表示（ユーザビリティ重視）
+
+## 追加データの処理
+
+### 新しいデータセットの追加方法
+
+**1. 個別ファイル処理（複数のMarkdownファイルを別々の章として処理）:**
+```bash
+# 各ファイル用の個別ディレクトリ作成
+mkdir -p extra-input-1 extra-input-2 extra-input-3
+
+# 各ファイルをそれぞれのディレクトリにコピー
+cp source/1.md extra-input-1/
+cp source/2.md extra-input-2/
+cp source/3.md extra-input-3/
+
+# 個別にパイプライン実行
+python pipeline.py --input ./extra-input-1 --out ./output-extra-1
+python pipeline.py --input ./extra-input-2 --out ./output-extra-2
+python pipeline.py --input ./extra-input-3 --out ./output-extra-3
+```
+
+**2. WebUIでの表示設定:**
+```bash
+# 生成されたgraph.jsonをセクション固有のファイル名でコピー
+cp output-extra-1/graph.json webui/public/graph_extra-1.json
+cp output-extra-2/graph.json webui/public/graph_extra-2.json
+cp output-extra-3/graph.json webui/public/graph_extra-3.json
+```
+
+**3. Toolbarコンポーネントへの追加:**
+```typescript
+// webui/src/components/Toolbar.tsx
+const sections = [
+  { value: 'extra-1', label: 'Extra-1: タイトル1' },
+  { value: 'extra-2', label: 'Extra-2: タイトル2' },
+  { value: 'extra-3', label: 'Extra-3: タイトル3' },
+  // 既存のセクション...
+];
+```
+
+### WebUIファイル命名規則
+
+- **セクション固有ファイル**: `graph_${sectionId}.json`
+  - 例: `graph_sec1-0.json`, `graph_extra-1.json`
+- **dataLoaderの動作**: セクションIDに基づいて自動的にファイルを探索
+- **フォールバック**: ファイルが見つからない場合は`graph_sec1-0.json`または内蔵データを使用
+
+### 重要な変更履歴
+
+**viewer.html削除（2025-09-11）:**
+- 理由: WebUIへの完全移行により不要に
+- 対応: pipeline.pyからviewer生成コードを削除
+- 影響: 静的HTMLビューアは生成されなくなり、WebUIのみ使用
+
+**複数ファイル処理の修正（2025-09-11）:**
+- 問題: pipeline.pyが複数ファイルを1つの統合グラフとして処理
+- 解決: 各ファイルを個別ディレクトリに配置して個別処理
+- 利点: 各章の概念が独立して管理され、章ごとの特徴が保持される
+
+### デバッグTips
+
+**WebUI開発サーバーのポート確認:**
+```bash
+# バックグラウンドプロセスの出力確認
+BashOutput tool使用、bash_idを指定
+
+# ポートが既に使用中の場合、Viteは自動的に次のポートを選択
+# デフォルト: 3000 → 3001 → 3002...
+```
+
+**不要なサーバーの停止:**
+```bash
+# 特定ポートのプロセスを終了
+lsof -ti:8000 | xargs kill -9
+lsof -ti:8001 | xargs kill -9
+```

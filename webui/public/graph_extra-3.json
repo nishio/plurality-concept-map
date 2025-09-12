@@ -11,7 +11,7 @@
       ],
       "evidence": [
         {
-          "text": "Pluralityとは「社会的差異を超えたコラボレーションのための技術」である。"
+          "text": "本書ではPluralityを「社会的差異を超えたコラボレーションのための技術」と定義している。"
         }
       ]
     },
@@ -19,7 +19,7 @@
       "id": "collaboration",
       "label": "Collaboration",
       "tier": "core",
-      "definition": "共有された創造的プロセスを強調する協力の形。",
+      "definition": "共有された創造的プロセスを強調する相互作用。",
       "aliases": [
         "共創",
         "ピア・プロダクション"
@@ -34,13 +34,41 @@
       "id": "cooperation",
       "label": "Cooperation",
       "tier": "core",
-      "definition": "取引的な相互作用を指す協力の形。",
+      "definition": "取引的な相互作用を指す場合もある相互作用の形態。",
       "aliases": [
         "コオペレーション"
       ],
       "evidence": [
         {
           "text": "『コオペレーション』にはこの意味合いも含まれるが、必ずしも創造的な相乗効果を伴わず、より取引的な相互作用を指す場合もある。"
+        }
+      ]
+    },
+    {
+      "id": "quadratic_voting",
+      "label": "Quadratic Voting",
+      "tier": "core",
+      "definition": "投票権を自由に配分し、意志の強さを反映する投票手法。",
+      "aliases": [
+        "QV"
+      ],
+      "evidence": [
+        {
+          "text": "QVでは、各参加者に与えられた「投票権（ボイスクレジット）」を自由に配分して複数票を投じることができる。"
+        }
+      ]
+    },
+    {
+      "id": "quadratic_funding",
+      "label": "Quadratic Funding",
+      "tier": "core",
+      "definition": "不特定多数からの小口支援を集める資金提供メカニズム。",
+      "aliases": [
+        "QF"
+      ],
+      "evidence": [
+        {
+          "text": "QVの応用としてクアドラティック資金提供（Quadratic Funding: QF）も提案し、不特定多数からの小口支援を効果的に集め、公共プロジェクトを資金面から支えるメカニズムを実験している。"
         }
       ]
     },
@@ -54,37 +82,7 @@
       ],
       "evidence": [
         {
-          "text": "台湾政府はvTaiwanなどのオンライン対話プラットフォームを活用し、市民と政府が共に議論し合意形成を図る仕組みを確立した。"
-        }
-      ]
-    },
-    {
-      "id": "quadratic_voting",
-      "label": "Quadratic Voting",
-      "tier": "core",
-      "definition": "投票権を自由に配分し、意志の強さを反映する投票方法。",
-      "aliases": [
-        "QV",
-        "クアドラティック投票"
-      ],
-      "evidence": [
-        {
-          "text": "QVでは、各参加者に与えられた「投票権（ボイスクレジット）」を自由に配分して複数票を投じることができる。"
-        }
-      ]
-    },
-    {
-      "id": "quadratic_funding",
-      "label": "Quadratic Funding",
-      "tier": "core",
-      "definition": "不特定多数からの小口支援を集める資金調達メカニズム。",
-      "aliases": [
-        "QF",
-        "クアドラティック資金提供"
-      ],
-      "evidence": [
-        {
-          "text": "QVの応用としてクアドラティック資金提供（Quadratic Funding: QF）も提案し、不特定多数からの小口支援を効果的に集め、公共プロジェクトを資金面から支えるメカニズムを実験している。"
+          "text": "デジタル民主主義の実践が、実はオフラインでの膨大な努力なしには実現しないことが明らかになった。"
         }
       ]
     },
@@ -92,7 +90,7 @@
       "id": "complex_systems",
       "label": "Complex Systems",
       "tier": "core",
-      "definition": "単純な要素の相互作用から複雑な現象が生じる科学。",
+      "definition": "単純な要素の相互作用から複雑な現象が生じる科学の分野。",
       "aliases": [
         "複雑系"
       ],
@@ -106,7 +104,7 @@
       "id": "cybernetics",
       "label": "Cybernetics",
       "tier": "core",
-      "definition": "制御技術が生命の不可分な拡張であることを示す学問。",
+      "definition": "制御技術と生命の関係を探求する学問分野。",
       "aliases": [
         "サイバネティックス"
       ],
@@ -117,8 +115,8 @@
       ]
     },
     {
-      "id": "social_relations",
-      "label": "Social Relations",
+      "id": "social_relationships",
+      "label": "Social Relationships",
       "tier": "core",
       "definition": "人間が異なる役割を求められる社会的なつながり。",
       "aliases": [
@@ -134,7 +132,7 @@
       "id": "creative_process",
       "label": "Creative Process",
       "tier": "core",
-      "definition": "差異を包容することで生まれる新たなアイデアの生成過程。",
+      "definition": "差異を包容することで生まれる新しいアイデアの生成過程。",
       "aliases": [
         "創造的プロセス"
       ],
@@ -148,13 +146,13 @@
       "id": "trust_in_government",
       "label": "Trust in Government",
       "tier": "core",
-      "definition": "市民と政府の協働によって築かれる信頼関係。",
+      "definition": "市民と政府の間の信頼関係の重要性。",
       "aliases": [
         "政府への信頼"
       ],
       "evidence": [
         {
-          "text": "タンは、この一連のデジタル協働を通じ、台湾社会において不信が高まっていた政府への信頼を取り戻すことに成功した。"
+          "text": "この一連のデジタル協働を通じ、台湾社会において不信が高まっていた政府への信頼を取り戻すことに成功した。"
         }
       ]
     },
@@ -176,14 +174,13 @@
       "id": "product-market_fit",
       "label": "Product-Market Fit",
       "tier": "core",
-      "definition": "市場のニーズに合致した製品やサービスの適合性。",
+      "definition": "市場における製品の適合性を評価する指標。",
       "aliases": [
-        "PMF",
-        "プロダクト・マーケット・フィット"
+        "PMF"
       ],
       "evidence": [
         {
-          "text": "今後はより仕組み化していき、誰もが実践できるようにしなくてはいけない。そのキーワードは、プロダクト・マーケット・フィット（PMF）だとわたしは考えている。"
+          "text": "どれがPMFを達成していて、どれがプルーフ・オブ・コンセプト（PoC）のレベルなのかを理解することが大事だ。"
         }
       ]
     },
@@ -191,7 +188,7 @@
       "id": "ai_in_democracy",
       "label": "AI in Democracy",
       "tier": "core",
-      "definition": "AI技術を用いた新たな民主主義の実践。",
+      "definition": "AI技術の民主主義への応用とその影響。",
       "aliases": [
         "AIと民主主義"
       ],
@@ -200,14 +197,28 @@
           "text": "特にAI時代の到来により、これまで不可能と思われていたことが可能になるかもしれない。"
         }
       ]
+    },
+    {
+      "id": "diversity",
+      "label": "Diversity",
+      "tier": "core",
+      "definition": "異なる視点や背景を持つ人々の共存の重要性。",
+      "aliases": [
+        "多様性"
+      ],
+      "evidence": [
+        {
+          "text": "差異が共存するためには技術が必要であり、技術が十分でなければ、差異を社会的に許容できなくなる。"
+        }
+      ]
     }
   ],
   "edges": [
     {
       "source": "plurality",
       "target": "collaboration",
-      "relation": "includes",
-      "relation_description": "Pluralityは社会的差異を超えたコラボレーションのための技術である。",
+      "relation": "requires",
+      "relation_description": "Plurality requires collaboration across social differences.",
       "confidence": 0.9,
       "evidence": [
         {
@@ -218,20 +229,20 @@
     {
       "source": "collaboration",
       "target": "cooperation",
-      "relation": "related to",
-      "relation_description": "CollaborationはCooperationと関連しているが、より創造的なプロセスを強調している。",
+      "relation": "includes",
+      "relation_description": "Collaboration includes cooperation across different social groups.",
       "confidence": 0.8,
       "evidence": [
         {
-          "text": "私は『コラボレーション』という言葉を用いて『共創』や『ピア・プロダクション』を表現し、共有された創造的プロセスを強調している。"
+          "text": "タンに直接尋ねたところ、以下の返答があった。"
         }
       ]
     },
     {
       "source": "quadratic_voting",
       "target": "quadratic_funding",
-      "relation": "applies to",
-      "relation_description": "Quadratic Votingの応用としてQuadratic Fundingが提案されている。",
+      "relation": "related to",
+      "relation_description": "Quadratic Voting is related to Quadratic Funding as both are mechanisms proposed by Glen Weyl.",
       "confidence": 0.85,
       "evidence": [
         {
@@ -240,10 +251,10 @@
       ]
     },
     {
-      "source": "trust_in_government",
-      "target": "digital_democracy",
+      "source": "digital_democracy",
+      "target": "trust_in_government",
       "relation": "enhances",
-      "relation_description": "Digital Democracyは政府への信頼を高める役割を果たす。",
+      "relation_description": "Digital Democracy enhances trust in government through collaborative platforms.",
       "confidence": 0.9,
       "evidence": [
         {
@@ -255,7 +266,7 @@
       "source": "complex_systems",
       "target": "cybernetics",
       "relation": "influences",
-      "relation_description": "Complex SystemsはCyberneticsに影響を与えている。",
+      "relation_description": "Complex Systems influences Cybernetics as both deal with interactions leading to emergent phenomena.",
       "confidence": 0.75,
       "evidence": [
         {
@@ -267,11 +278,35 @@
       "source": "ai_in_democracy",
       "target": "digital_democracy",
       "relation": "supports",
-      "relation_description": "AI in DemocracyはDigital Democracyを支える技術である。",
+      "relation_description": "AI in Democracy supports Digital Democracy by enhancing citizen engagement.",
       "confidence": 0.8,
       "evidence": [
         {
-          "text": "AIが大規模なコメントの分類や要約作業を代行したらどうなるか、人間の代わりにAIがファシリテーションをしたらどうなるか。"
+          "text": "AIが大規模なコメントの分類や要約作業を代行したらどうなるか。"
+        }
+      ]
+    },
+    {
+      "source": "diversity",
+      "target": "collaboration",
+      "relation": "enables",
+      "relation_description": "Diversity enables collaboration by bringing together different perspectives.",
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "text": "創造的プロセスを生み出す源泉こそが差異であり、差異は必ずしも悪いものではない。"
+        }
+      ]
+    },
+    {
+      "source": "product-market_fit",
+      "target": "digital_democracy",
+      "relation": "requires",
+      "relation_description": "Product-Market Fit requires Digital Democracy mechanisms for effective implementation.",
+      "confidence": 0.7,
+      "evidence": [
+        {
+          "text": "どれがPMFを達成していて、どれがプルーフ・オブ・コンセプト（PoC）のレベルなのかを理解することが大事だ。"
         }
       ]
     }

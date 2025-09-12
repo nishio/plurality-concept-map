@@ -1,0 +1,779 @@
+{
+  "nodes": [
+    {
+      "id": "plurality",
+      "label": "PLURALITY",
+      "tier": "core",
+      "definition": "社会的差異を超えたコラボレーションのための技術。",
+      "aliases": [
+        "Plurality",
+        "多元性",
+        "多数性"
+      ],
+      "evidence": [
+        {
+          "text": "プルラリティは「複数性/多元性」を意味し「シンギュラリティ/単一性」に対置される概念として、「社会的差異を超えたコラボレーションのための技術」と定義されています。"
+        },
+        {
+          "text": "Pluralityとは「社会的差異を超えたコラボレーションのための技術」である。"
+        }
+      ]
+    },
+    {
+      "id": "デジタル民主主義",
+      "label": "デジタル民主主義",
+      "tier": "core",
+      "definition": "テクノロジーを活用した民主主義の形態。",
+      "aliases": [
+        "Digital Democracy",
+        "デジタル民主主義"
+      ],
+      "evidence": [
+        {
+          "text": "私たちがいま直面しているデジタル民主主義の課題において、まさに核心をなすものである。"
+        },
+        {
+          "text": "次のデジタル民主主義の舞台は日本"
+        },
+        {
+          "text": "台湾政府はvTaiwanなどのオンライン対話プラットフォームを活用し、市民と政府が共に議論し合意形成を図る仕組みを確立した。"
+        }
+      ]
+    },
+    {
+      "id": "社会的分断",
+      "label": "社会的分断",
+      "tier": "core",
+      "definition": "社会における異なるグループ間の隔たり。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "AIや大規模プラットフォームなどによるフェイクニュースの蔓延や中央集権的な監視などによって民主主義を脅かし、社会的分断を深めています。"
+        }
+      ]
+    },
+    {
+      "id": "異なる視点",
+      "label": "異なる視点",
+      "tier": "core",
+      "definition": "多様な考え方や意見の存在。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "創造性はしばしば異なる視点が交差するところで最も鮮やかに花開くものだ。"
+        }
+      ]
+    },
+    {
+      "id": "協働",
+      "label": "協働",
+      "tier": "core",
+      "definition": "共通の目標に向かって共同で作業すること。",
+      "aliases": [
+        "共同作業",
+        "協働",
+        "新たなコラボレーション"
+      ],
+      "evidence": [
+        {
+          "text": "共同で課題を解決するために必要な、貴重なツールを提供する。"
+        },
+        {
+          "text": "新たなコラボレーションのモデルを示して、ホワイトカラー職の改善モデルの潜在力を世界に示す機会を提供するものなのだ。"
+        }
+      ]
+    },
+    {
+      "id": "包摂的コミュニティ",
+      "label": "包摂的コミュニティ",
+      "tier": "core",
+      "definition": "すべての人が参加できるコミュニティ。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "テクノロジーに支えられた包摂的なコミュニティをどのように築いていけるのだろうか。"
+        }
+      ]
+    },
+    {
+      "id": "多様性",
+      "label": "多様性",
+      "tier": "core",
+      "definition": "異なる背景や意見が共存する状態。",
+      "aliases": [
+        "多様性",
+        "文化的差異",
+        "社会的差異"
+      ],
+      "evidence": [
+        {
+          "text": "デジタル空間を本来あるべき多様性と人々の参加を促す形へと導く力を発揮できていない。"
+        },
+        {
+          "text": "著者たちは単一の視点ではなく多様な考え方を認め、テクノロジーと民主主義の共生を目指すことで、社会的・文化的な違いを超えた相互理解と尊重を育む新たな道を示しています。"
+        }
+      ]
+    },
+    {
+      "id": "新たな物語",
+      "label": "新たな物語",
+      "tier": "core",
+      "definition": "新しい視点やアプローチを持つ物語。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "新たな物語を受け入れ、そしてこれまでとは違う制度を築くことによって、テクノロジーと民主主義を鳥の両翼のように協調させ、より開かれた協働的な未来へ私たちを導くことが可能なのだ。"
+        }
+      ]
+    },
+    {
+      "id": "共同設計者",
+      "label": "共同設計者",
+      "tier": "core",
+      "definition": "未来を共に設計する役割を持つ人々。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "私たちこそが未来の共同設計者である。"
+        }
+      ]
+    },
+    {
+      "id": "テクノロジーと民主主義の共生",
+      "label": "テクノロジーと民主主義の共生",
+      "tier": "core",
+      "definition": "テクノロジーと民主主義が相互に支え合う状態。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "テクノロジーと民主主義の共生を目指すことで、社会的・文化的な違いを超えた相互理解と尊重を育む新たな道を示しています。"
+        }
+      ]
+    },
+    {
+      "id": "創造性",
+      "label": "創造性",
+      "tier": "core",
+      "definition": "新しいアイデアや解決策を生み出す能力。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "創造性はしばしば異なる視点が交差するところで最も鮮やかに花開くものだ。"
+        }
+      ]
+    },
+    {
+      "id": "相互理解",
+      "label": "相互理解",
+      "tier": "core",
+      "definition": "異なる立場や意見を理解し合うこと。",
+      "aliases": [
+        "共感",
+        "理解",
+        "相互理解"
+      ],
+      "evidence": [
+        {
+          "text": "社会的・文化的な違いを超えた相互理解と尊重を育む新たな道を示しています。"
+        },
+        {
+          "text": "社会的・文化的な違いを超えた相互理解と尊重を育む新たな道を示しています。"
+        }
+      ]
+    },
+    {
+      "id": "技術革新",
+      "label": "技術革新",
+      "tier": "core",
+      "definition": "新しい技術や方法の開発。",
+      "aliases": [
+        "IT革新",
+        "テクノロジーの進化",
+        "技術革新"
+      ],
+      "evidence": [
+        {
+          "text": "テクノロジーによる革新と社会的調和への深い尊重とをあわせ持つ独自の文化力で、日本こそが、次なる道を照らし出す存在になり得ると強く信じている。"
+        },
+        {
+          "text": "急速な技術革新の時代において、ITが世界をつなぐ一方で、AIや大規模プラットフォームなどによるフェイクニュースの蔓延や中央集権的な監視などによって民主主義を脅かし、社会的分断を深めています。"
+        }
+      ]
+    },
+    {
+      "id": "中央集権的プラットフォーム",
+      "label": "中央集権的プラットフォーム",
+      "tier": "core",
+      "definition": "一つの中心が管理するデジタルプラットフォーム。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "中央集権的なプラットフォームが、私たちのつながりから価値を搾取する一方で、共有しているという現実感を損なわせ、社会的な結びつきを根こそぎ奪う恐れがある。"
+        }
+      ]
+    },
+    {
+      "id": "新たな対話",
+      "label": "新たな対話",
+      "tier": "core",
+      "definition": "新しいコミュニケーションの形。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "新たな対話を始めて溝を埋め、周縁化されがちな声を増幅するプラットフォームを設計したり、あるいは私たちが将来の世代にとって十分な良き先祖となることを保証する政策を推進したりするかもしれない。"
+        }
+      ]
+    },
+    {
+      "id": "プルラリティ",
+      "label": "プルラリティ",
+      "tier": "core",
+      "definition": "社会的差異を超えたコラボレーションのための技術。",
+      "aliases": [
+        "複数性",
+        "多元性"
+      ],
+      "evidence": [
+        {
+          "text": "プルラリティは「複数性/多元性」を意味し「シンギュラリティ/単一性」に対置される概念として、「社会的差異を超えたコラボレーションのための技術」と定義されています。"
+        }
+      ]
+    },
+    {
+      "id": "バックキャスティング",
+      "label": "バックキャスティング",
+      "tier": "core",
+      "definition": "未来の目標から逆算して計画を立てる手法。",
+      "aliases": [],
+      "evidence": [
+        {
+          "text": "その実現方法を「バックキャスティング」して、それを社会の会話に取り入れている。"
+        }
+      ]
+    },
+    {
+      "id": "市民参加",
+      "label": "市民参加",
+      "tier": "core",
+      "definition": "市民が政治や社会に積極的に関与すること。",
+      "aliases": [
+        "一般参加",
+        "市民の関与"
+      ],
+      "evidence": [
+        {
+          "text": "本書の内容をもとに、その技術を大幅に拡張して選挙基盤構築への大規模な一般参加を実現した。"
+        }
+      ]
+    },
+    {
+      "id": "文化的共鳴",
+      "label": "文化的共鳴",
+      "tier": "core",
+      "definition": "異なる文化間での理解と共感の形成。",
+      "aliases": [
+        "文化的共感",
+        "文化的連携"
+      ],
+      "evidence": [
+        {
+          "text": "私たちの視点が共振したことで、会の終わり頃になると私は目頭が熱くなったほどだった。"
+        }
+      ]
+    },
+    {
+      "id": "ホーリスティック",
+      "label": "ホーリスティック",
+      "tier": "core",
+      "definition": "全体を一つのシステムとして捉える考え方。",
+      "aliases": [
+        "全体的"
+      ],
+      "evidence": [
+        {
+          "text": "この博物館が私の想像よりもはるかに⿻の精神をホーリスティックに体現していることがわかってきた。"
+        }
+      ]
+    },
+    {
+      "id": "デジタル技術の影響",
+      "label": "デジタル技術の影響",
+      "tier": "core",
+      "definition": "デジタル技術が社会や政治に与える影響。",
+      "aliases": [
+        "テクノロジーの影響"
+      ],
+      "evidence": [
+        {
+          "text": "ソーシャルメディアなどのデジタル技術が西側民主主義に与える腐食性の影響から動機づけを得ようとするものだ。"
+        }
+      ]
+    },
+    {
+      "id": "イノベーション",
+      "label": "イノベーション",
+      "tier": "core",
+      "definition": "新しいアイデアや技術の導入。",
+      "aliases": [
+        "革新",
+        "新技術"
+      ],
+      "evidence": [
+        {
+          "text": "日本が優れた世界のリーダーとなるための異なった、改善された民主主義形態をもたらし、オフィスにおける新たなコラボレーションのモデルを示して、ホワイトカラー職の改善モデルの潜在力を世界に示す機会を提供するものなのだ。"
+        }
+      ]
+    },
+    {
+      "id": "社会の会話",
+      "label": "社会の会話",
+      "tier": "core",
+      "definition": "社会全体での意見交換や議論。",
+      "aliases": [
+        "公共の議論",
+        "社会的対話"
+      ],
+      "evidence": [
+        {
+          "text": "それを社会の会話に取り入れている。"
+        }
+      ]
+    },
+    {
+      "id": "政治的麻痺",
+      "label": "政治的麻痺",
+      "tier": "core",
+      "definition": "政治が機能しない状態。",
+      "aliases": [
+        "政治の停滞",
+        "政治的無関心"
+      ],
+      "evidence": [
+        {
+          "text": "日本の膠着した国会に蔓延し、社会を失望させてきた政治的麻痺とシニシズムを克服する原動力となることが期待される。"
+        }
+      ]
+    },
+    {
+      "id": "文化の承認",
+      "label": "文化の承認",
+      "tier": "core",
+      "definition": "他文化からの評価や認識。",
+      "aliases": [
+        "文化的認識"
+      ],
+      "evidence": [
+        {
+          "text": "自国ですでに発達した文化や知的潮流に対する外国からの承認であり、それを国の政治経済再生の基盤にするよう促すものなのだ。"
+        }
+      ]
+    },
+    {
+      "id": "未来の価値観",
+      "label": "未来の価値観",
+      "tier": "core",
+      "definition": "未来に向けた社会の理想や目標。",
+      "aliases": [
+        "未来志向の価値観"
+      ],
+      "evidence": [
+        {
+          "text": "市民たちに、未来に実現してほしい価値観を投影してくれと繰り返し求めつつ、"
+        }
+      ]
+    },
+    {
+      "id": "collaboration",
+      "label": "Collaboration",
+      "tier": "core",
+      "definition": "共有された創造的プロセスを強調する協力の形。",
+      "aliases": [
+        "共創",
+        "ピア・プロダクション"
+      ],
+      "evidence": [
+        {
+          "text": "『コラボレーション』という言葉を用いて『共創』や『ピア・プロダクション』を表現し、共有された創造的プロセスを強調している。"
+        }
+      ]
+    },
+    {
+      "id": "cooperation",
+      "label": "Cooperation",
+      "tier": "core",
+      "definition": "取引的な相互作用を指す協力の形。",
+      "aliases": [
+        "コオペレーション"
+      ],
+      "evidence": [
+        {
+          "text": "『コオペレーション』にはこの意味合いも含まれるが、必ずしも創造的な相乗効果を伴わず、より取引的な相互作用を指す場合もある。"
+        }
+      ]
+    },
+    {
+      "id": "quadratic_voting",
+      "label": "Quadratic Voting",
+      "tier": "core",
+      "definition": "投票権を自由に配分し、意志の強さを反映する投票方法。",
+      "aliases": [
+        "QV",
+        "クアドラティック投票"
+      ],
+      "evidence": [
+        {
+          "text": "QVでは、各参加者に与えられた「投票権（ボイスクレジット）」を自由に配分して複数票を投じることができる。"
+        }
+      ]
+    },
+    {
+      "id": "quadratic_funding",
+      "label": "Quadratic Funding",
+      "tier": "core",
+      "definition": "小口支援を効果的に集める資金調達メカニズム。",
+      "aliases": [
+        "QF",
+        "クアドラティック資金提供"
+      ],
+      "evidence": [
+        {
+          "text": "QVの応用としてクアドラティック資金提供（Quadratic Funding: QF）も提案し、不特定多数からの小口支援を効果的に集め、公共プロジェクトを資金面から支えるメカニズムを実験している。"
+        }
+      ]
+    },
+    {
+      "id": "complex_systems",
+      "label": "Complex Systems",
+      "tier": "core",
+      "definition": "単純な要素の相互作用から複雑な現象が生じる科学の分野。",
+      "aliases": [
+        "複雑系"
+      ],
+      "evidence": [
+        {
+          "text": "複雑系の科学では、たとえ個々の素子が単純であっても、その相互作用からカオスやフラクタルなどの複雑な現象が生じる。"
+        }
+      ]
+    },
+    {
+      "id": "cybernetics",
+      "label": "Cybernetics",
+      "tier": "core",
+      "definition": "制御技術と生命の関係を探求する科学。",
+      "aliases": [
+        "サイバネティックス"
+      ],
+      "evidence": [
+        {
+          "text": "サイバネティックスは、生命のなかに制御技術が存在し、技術が生命の不可分な拡張であることを示している。"
+        }
+      ]
+    },
+    {
+      "id": "social_relationships",
+      "label": "Social Relationships",
+      "tier": "core",
+      "definition": "人間の役割や行動を形成する相互作用のネットワーク。",
+      "aliases": [
+        "社会関係"
+      ],
+      "evidence": [
+        {
+          "text": "人間はアトミックな存在ではなく、その社会関係に応じて異なる役割を求められる。"
+        }
+      ]
+    },
+    {
+      "id": "creative_process",
+      "label": "Creative Process",
+      "tier": "core",
+      "definition": "差異を包容し、協働を通じて新しいアイデアを生み出す過程。",
+      "aliases": [
+        "創造的プロセス"
+      ],
+      "evidence": [
+        {
+          "text": "創造的プロセスを生み出す源泉こそが差異であり、差異は必ずしも悪いものではない。"
+        }
+      ]
+    },
+    {
+      "id": "trust_in_government",
+      "label": "Trust in Government",
+      "tier": "core",
+      "definition": "市民と政府間の信頼関係の構築。",
+      "aliases": [
+        "政府への信頼"
+      ],
+      "evidence": [
+        {
+          "text": "タンは、この一連のデジタル協働を通じ、台湾社会において不信が高まっていた政府への信頼を取り戻すことに成功した。"
+        }
+      ]
+    },
+    {
+      "id": "participatory_democracy",
+      "label": "Participatory Democracy",
+      "tier": "core",
+      "definition": "市民が直接的に政治に参加する仕組み。",
+      "aliases": [
+        "参加型民主主義"
+      ],
+      "evidence": [
+        {
+          "text": "台湾の市民参加型民主主義のファシリテーターを長く務めた林雨蒼へのインタビューで、デジタル民主主義の実践が、実はオフラインでの膨大な努力なしには実現しないことが明らかになった。"
+        }
+      ]
+    },
+    {
+      "id": "emergent_democracy",
+      "label": "Emergent Democracy",
+      "tier": "core",
+      "definition": "市民の自発的参加と協働による政治形成の可能性。",
+      "aliases": [
+        "創発民主制"
+      ],
+      "evidence": [
+        {
+          "text": "伊藤穰一は「創発民主制」を提唱し、インターネットを通じた市民の自発的参加と協働による政治形成の可能性を示した。"
+        }
+      ]
+    },
+    {
+      "id": "product-market_fit",
+      "label": "Product-Market Fit",
+      "tier": "core",
+      "definition": "市場における製品の適合性を評価する指標。",
+      "aliases": [
+        "PMF",
+        "プロダクト・マーケット・フィット"
+      ],
+      "evidence": [
+        {
+          "text": "どれがPMFを達成していて、どれがプルーフ・オブ・コンセプト（PoC）のレベルなのかを理解することが大事だ。"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "plurality",
+      "target": "多様性",
+      "relation": "includes",
+      "relation_description": "PLURALITYは多様性を含む概念である。",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "text": "プルラリティは「複数性/多元性」を意味し「シンギュラリティ/単一性」に対置される概念として、「社会的差異を超えたコラボレーションのための技術」と定義されています。"
+        }
+      ]
+    },
+    {
+      "source": "社会的分断",
+      "target": "テクノロジーと民主主義の共生",
+      "relation": "requires",
+      "relation_description": "社会的分断を解消するためにはテクノロジーと民主主義の共生が必要である。",
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "text": "AIや大規模プラットフォームなどによるフェイクニュースの蔓延や中央集権的な監視などによって民主主義を脅かし、社会的分断を深めています。"
+        }
+      ]
+    },
+    {
+      "source": "異なる視点",
+      "target": "創造性",
+      "relation": "enhances",
+      "relation_description": "異なる視点は創造性を高める要素である。",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "text": "創造性はしばしば異なる視点が交差するところで最も鮮やかに花開くものだ。"
+        }
+      ]
+    },
+    {
+      "source": "協働",
+      "target": "包摂的コミュニティ",
+      "relation": "creates",
+      "relation_description": "協働は包摂的コミュニティを創造する。",
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "text": "テクノロジーに支えられた包摂的なコミュニティをどのように築いていけるのだろうか。"
+        }
+      ]
+    },
+    {
+      "source": "新たな物語",
+      "target": "相互理解",
+      "relation": "promotes",
+      "relation_description": "新たな物語は相互理解を促進する。",
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "text": "異なる選択肢を取り、新たな物語を受け入れ、そしてこれまでとは違う制度を築くことによって、テクノロジーと民主主義を鳥の両翼のように協調させ、より開かれた協働的な未来へ私たちを導くことが可能なのだ。"
+        }
+      ]
+    },
+    {
+      "source": "中央集権的プラットフォーム",
+      "target": "社会的分断",
+      "relation": "deepens",
+      "relation_description": "中央集権的プラットフォームは社会的分断を深める。",
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "text": "中央集権的なプラットフォームが、私たちのつながりから価値を搾取する一方で、共有しているという現実感を損なわせ、社会的な結びつきを根こそぎ奪う恐れがある。"
+        }
+      ]
+    },
+    {
+      "source": "共同設計者",
+      "target": "新たな対話",
+      "relation": "initiates",
+      "relation_description": "共同設計者は新たな対話を始める。",
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "text": "新たな対話を始めて溝を埋め、周縁化されがちな声を増幅するプラットフォームを設計したり、あるいは私たちが将来の世代にとって十分な良き先祖となることを保証する政策を推進したりするかもしれない。"
+        }
+      ]
+    },
+    {
+      "source": "プルラリティ",
+      "target": "デジタル民主主義",
+      "relation": "promotes",
+      "relation_description": "プルラリティはデジタル民主主義を促進する新たな社会ビジョンです。",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "text": "プルラリティは、台湾のデジタル民主主義を牽引する初代デジタル大臣オードリー・タンとマイクロソフト首席研究員にして気鋭の経済学者E・グレン・ワイルが提唱する新たな社会ビジョンです。"
+        }
+      ]
+    },
+    {
+      "source": "技術革新",
+      "target": "デジタル技術の影響",
+      "relation": "affects",
+      "relation_description": "技術革新はデジタル技術の影響を受けます。",
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "text": "急速な技術革新の時代において、ITが世界をつなぐ一方で、AIや大規模プラットフォームなどによるフェイクニュースの蔓延や中央集権的な監視などによって民主主義を脅かし、社会的分断を深めています。"
+        }
+      ]
+    },
+    {
+      "source": "相互理解",
+      "target": "文化的共鳴",
+      "relation": "fosters",
+      "relation_description": "相互理解は文化的共鳴を育む要素です。",
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "text": "多様な考え方を認め、テクノロジーと民主主義の共生を目指すことで、社会的・文化的な違いを超えた相互理解と尊重を育む新たな道を示しています。"
+        }
+      ]
+    },
+    {
+      "source": "市民参加",
+      "target": "政治的麻痺",
+      "relation": "overcomes",
+      "relation_description": "市民参加は政治的麻痺を克服する原動力となることが期待されます。",
+      "confidence": 0.7,
+      "evidence": [
+        {
+          "text": "市民たちが選挙の結果を理解し、それを形成する支援を行った。"
+        }
+      ]
+    },
+    {
+      "source": "バックキャスティング",
+      "target": "未来の価値観",
+      "relation": "projects",
+      "relation_description": "バックキャスティングは未来の価値観を投影する手法です。",
+      "confidence": 0.65,
+      "evidence": [
+        {
+          "text": "未来に実現してほしい価値観を投影してくれと繰り返し求めつつ、同時にその実現方法を「バックキャスティング」して、それを社会の会話に取り入れている。"
+        }
+      ]
+    },
+    {
+      "source": "plurality",
+      "target": "collaboration",
+      "relation": "includes",
+      "relation_description": "Plurality is a technology for collaboration beyond social differences.",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "text": "Pluralityとは「社会的差異を超えたコラボレーションのための技術」である。"
+        }
+      ]
+    },
+    {
+      "source": "collaboration",
+      "target": "creative_process",
+      "relation": "requires",
+      "relation_description": "Collaboration involves a creative process that is essential for problem-solving.",
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "text": "差異を超えてコラボレーションを実現するためには技術が必要であり、その過程には創造的なプロセスが伴う。"
+        }
+      ]
+    },
+    {
+      "source": "quadratic_voting",
+      "target": "quadratic_funding",
+      "relation": "related to",
+      "relation_description": "Quadratic Voting is related to Quadratic Funding as both are mechanisms proposed by Glen Weyl.",
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "text": "QVの応用としてクアドラティック資金提供（Quadratic Funding: QF）も提案し、不特定多数からの小口支援を効果的に集め、公共プロジェクトを資金面から支えるメカニズムを実験している。"
+        }
+      ]
+    },
+    {
+      "source": "complex_systems",
+      "target": "cybernetics",
+      "relation": "intersects with",
+      "relation_description": "Complex systems intersect with cybernetics as both explore interactions leading to complex phenomena.",
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "text": "複雑系の科学では、たとえ個々の素子が単純であっても、その相互作用からカオスやフラクタルなどの複雑な現象が生じる。"
+        }
+      ]
+    },
+    {
+      "source": "social_relationships",
+      "target": "cooperation",
+      "relation": "influences",
+      "relation_description": "Social relationships influence cooperation among individuals.",
+      "confidence": 0.7,
+      "evidence": [
+        {
+          "text": "人間はアトミックな存在ではなく、その社会関係に応じて異なる役割を求められる。"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "generated_at": "2025-09-11T15:26:00Z",
+    "model": "gpt-4o-mini",
+    "max_concepts": 15,
+    "cross_section": false,
+    "segment_level": "h2"
+  },
+  "sections": [
+    {
+      "id": "extra-0",
+      "chapter": 99,
+      "title": "Extra Chapter: オードリー・タン寄稿文書",
+      "content": "【先行公開】創造性は異なる視点が交差するところに花開く──『PLURALITY』日本語版　オードリー・タン寄稿"
+    }
+  ]
+}
