@@ -247,7 +247,7 @@
     {
       "source": "plurality",
       "target": "社会的差異",
-      "relation": "includes",
+      "relation": "含む",
       "relation_description": "PLURALITYは社会的差異を超えたコラボレーションのための技術を含む。",
       "confidence": 0.9,
       "evidence": [
@@ -259,7 +259,7 @@
     {
       "source": "テクノロジーの進歩",
       "target": "包摂的コミュニティ",
-      "relation": "requires",
+      "relation": "必要とする",
       "relation_description": "テクノロジーの進歩は包摂的コミュニティの構築を必要とする。",
       "confidence": 0.85,
       "evidence": [
@@ -271,7 +271,7 @@
     {
       "source": "テクノロジーと民主主義の協調",
       "target": "相互理解",
-      "relation": "promotes",
+      "relation": "促進する",
       "relation_description": "テクノロジーと民主主義の協調は相互理解を促進する。",
       "confidence": 0.8,
       "evidence": [
@@ -283,7 +283,7 @@
     {
       "source": "創造性",
       "target": "多様性",
-      "relation": "enhanced by",
+      "relation": "強化される",
       "relation_description": "創造性は多様性によって強化される。",
       "confidence": 0.75,
       "evidence": [
@@ -295,7 +295,7 @@
     {
       "source": "新たな物語",
       "target": "協働",
-      "relation": "requires",
+      "relation": "必要とする",
       "relation_description": "新たな物語は協働を必要とする。",
       "confidence": 0.7,
       "evidence": [
@@ -307,7 +307,7 @@
     {
       "source": "中央集権的プラットフォーム",
       "target": "社会的結びつき",
-      "relation": "threatens",
+      "relation": "脅かす",
       "relation_description": "中央集権的プラットフォームは社会的結びつきを脅かす。",
       "confidence": 0.9,
       "evidence": [

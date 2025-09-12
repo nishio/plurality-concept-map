@@ -16,7 +16,11 @@ Rules:
 - Focus on curriculum-aligned concepts that are central for learning.
 - Avoid meta, anecdotes, history unless explicitly in objectives.
 - Use short labels, no markdown.
-- Use the original language of the text: if the source text is in Japanese, use Japanese labels and definitions. Only use English for terms that appear in English in the original text.
+- **CRITICAL: Language matching requirement**
+  - If source text is in Japanese: ALL labels and definitions MUST be in Japanese
+  - Only use English if the exact English term appears in the original Japanese text (e.g., "AI", "Plurality")
+  - When Japanese text discusses English concepts, prefer Japanese translations when they exist in the text
+  - Example: If text says "デジタル民主主義", use "デジタル民主主義" not "Digital Democracy"
 - Evidence must be *verbatim* spans inside the section.
 
 Section title: {section_title}
@@ -47,7 +51,11 @@ Rules:
 - Only connect the provided concepts. No new nodes.
 - For "relation": provide a short label (1-3 words) suitable for graph display (e.g., "includes", "type of", "requires").
 - For "relation_description": provide full natural language description that includes the target concept (e.g., "Logistic regression is a type of machine learning").
-- Use the original language of the text: if the source text is in Japanese, use Japanese for both relation and relation_description. Only use English for terms that appear in English in the original text.
+- **CRITICAL: Language matching requirement**
+  - If source text is in Japanese: ALL relation and relation_description MUST be in Japanese
+  - Only use English if the exact English term appears in the original Japanese text
+  - Japanese examples: relation: "含む", "要求する", "影響する"; relation_description: "Aは〜を含む", "Bは〜を要求する"
+  - Ensure natural Japanese phrasing in relation_description
 - Evidence must ground the relation; omit the edge if no textual support.
 - Keep 3-12 edges per section.
 

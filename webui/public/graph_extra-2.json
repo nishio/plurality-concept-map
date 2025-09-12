@@ -200,7 +200,7 @@
     {
       "source": "プルラリティ",
       "target": "デジタル民主主義",
-      "relation": "promotes",
+      "relation": "促進する",
       "relation_description": "プルラリティはデジタル民主主義を促進する。",
       "confidence": 0.9,
       "evidence": [
@@ -212,7 +212,7 @@
     {
       "source": "テクノロジーと民主主義の共生",
       "target": "相互理解",
-      "relation": "fosters",
+      "relation": "育む",
       "relation_description": "テクノロジーと民主主義の共生は相互理解を育む。",
       "confidence": 0.85,
       "evidence": [
@@ -224,7 +224,7 @@
     {
       "source": "社会的分断",
       "target": "デジタル民主主義",
-      "relation": "threatens",
+      "relation": "脅かす",
       "relation_description": "社会的分断はデジタル民主主義を脅かす。",
       "confidence": 0.9,
       "evidence": [
@@ -236,7 +236,7 @@
     {
       "source": "市民参加",
       "target": "デジタル民主主義",
-      "relation": "enables",
+      "relation": "可能にする",
       "relation_description": "市民参加はデジタル民主主義を可能にする。",
       "confidence": 0.8,
       "evidence": [
@@ -248,7 +248,7 @@
     {
       "source": "文化的差異",
       "target": "相互理解",
-      "relation": "overcomes",
+      "relation": "超える",
       "relation_description": "文化的差異は相互理解を超える。",
       "confidence": 0.75,
       "evidence": [
@@ -260,7 +260,7 @@
     {
       "source": "ホーリスティック",
       "target": "プルラリティ",
-      "relation": "embodies",
+      "relation": "体現する",
       "relation_description": "ホーリスティックはプルラリティを体現している。",
       "confidence": 0.8,
       "evidence": [
@@ -272,7 +272,7 @@
     {
       "source": "イノベーション",
       "target": "デジタル民主主義",
-      "relation": "drives",
+      "relation": "推進する",
       "relation_description": "イノベーションはデジタル民主主義を推進する。",
       "confidence": 0.85,
       "evidence": [
@@ -284,7 +284,7 @@
     {
       "source": "コラボレーション",
       "target": "プルラリティ",
-      "relation": "requires",
+      "relation": "必要とする",
       "relation_description": "コラボレーションはプルラリティを必要とする。",
       "confidence": 0.8,
       "evidence": [

@@ -217,7 +217,7 @@
     {
       "source": "plurality",
       "target": "collaboration",
-      "relation": "requires",
+      "relation": "必要とする",
       "relation_description": "Pluralityは社会的差異を超えたコラボレーションを必要とする。",
       "confidence": 0.9,
       "evidence": [
@@ -229,7 +229,7 @@
     {
       "source": "collaboration",
       "target": "cooperation",
-      "relation": "includes",
+      "relation": "含む",
       "relation_description": "コラボレーションは異なる社会集団間でのコオペレーションを含む。",
       "confidence": 0.8,
       "evidence": [
@@ -241,7 +241,7 @@
     {
       "source": "quadratic_voting",
       "target": "quadratic_funding",
-      "relation": "related to",
+      "relation": "関連する",
       "relation_description": "クアドラティック投票とクアドラティック資金提供は、どちらもグレン・ワイルが提案したメカニズムとして関連している。",
       "confidence": 0.85,
       "evidence": [
@@ -253,7 +253,7 @@
     {
       "source": "digital_democracy",
       "target": "trust_in_government",
-      "relation": "enhances",
+      "relation": "高める",
       "relation_description": "デジタル民主主義は協働プラットフォームを通じて政府への信頼を高める。",
       "confidence": 0.9,
       "evidence": [
@@ -265,7 +265,7 @@
     {
       "source": "complex_systems",
       "target": "cybernetics",
-      "relation": "influences",
+      "relation": "影響する",
       "relation_description": "複雑系とサイバネティックスは、どちらも相互作用から創発現象を生み出すため影響し合っている。",
       "confidence": 0.75,
       "evidence": [
@@ -277,7 +277,7 @@
     {
       "source": "ai_in_democracy",
       "target": "digital_democracy",
-      "relation": "supports",
+      "relation": "支援する",
       "relation_description": "民主主義におけるAIは市民参加を促進することでデジタル民主主義を支援する。",
       "confidence": 0.8,
       "evidence": [
@@ -289,7 +289,7 @@
     {
       "source": "diversity",
       "target": "collaboration",
-      "relation": "enables",
+      "relation": "可能にする",
       "relation_description": "多様性は異なる視点を結集することでコラボレーションを可能にする。",
       "confidence": 0.85,
       "evidence": [
@@ -301,7 +301,7 @@
     {
       "source": "product-market_fit",
       "target": "digital_democracy",
-      "relation": "requires",
+      "relation": "必要とする",
       "relation_description": "プロダクト・マーケット・フィットは効果的な実装のためにデジタル民主主義のメカニズムを必要とする。",
       "confidence": 0.7,
       "evidence": [
