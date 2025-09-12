@@ -17,7 +17,7 @@
     },
     {
       "id": "collaboration",
-      "label": "Collaboration",
+      "label": "コラボレーション",
       "tier": "core",
       "definition": "共有された創造的プロセスを強調する相互作用。",
       "aliases": [
@@ -32,7 +32,7 @@
     },
     {
       "id": "cooperation",
-      "label": "Cooperation",
+      "label": "コオペレーション",
       "tier": "core",
       "definition": "取引的な相互作用を指す場合もある相互作用の形態。",
       "aliases": [
@@ -46,7 +46,7 @@
     },
     {
       "id": "quadratic_voting",
-      "label": "Quadratic Voting",
+      "label": "クアドラティック投票",
       "tier": "core",
       "definition": "投票権を自由に配分し、意志の強さを反映する投票手法。",
       "aliases": [
@@ -60,7 +60,7 @@
     },
     {
       "id": "quadratic_funding",
-      "label": "Quadratic Funding",
+      "label": "クアドラティック資金提供",
       "tier": "core",
       "definition": "不特定多数からの小口支援を集める資金提供メカニズム。",
       "aliases": [
@@ -74,7 +74,7 @@
     },
     {
       "id": "digital_democracy",
-      "label": "Digital Democracy",
+      "label": "デジタル民主主義",
       "tier": "core",
       "definition": "市民参加を促進するためのデジタル技術の活用。",
       "aliases": [
@@ -88,7 +88,7 @@
     },
     {
       "id": "complex_systems",
-      "label": "Complex Systems",
+      "label": "複雑系",
       "tier": "core",
       "definition": "単純な要素の相互作用から複雑な現象が生じる科学の分野。",
       "aliases": [
@@ -102,7 +102,7 @@
     },
     {
       "id": "cybernetics",
-      "label": "Cybernetics",
+      "label": "サイバネティックス",
       "tier": "core",
       "definition": "制御技術と生命の関係を探求する学問分野。",
       "aliases": [
@@ -116,7 +116,7 @@
     },
     {
       "id": "social_relationships",
-      "label": "Social Relationships",
+      "label": "社会関係",
       "tier": "core",
       "definition": "人間が異なる役割を求められる社会的なつながり。",
       "aliases": [
@@ -130,7 +130,7 @@
     },
     {
       "id": "creative_process",
-      "label": "Creative Process",
+      "label": "創造的プロセス",
       "tier": "core",
       "definition": "差異を包容することで生まれる新しいアイデアの生成過程。",
       "aliases": [
@@ -144,7 +144,7 @@
     },
     {
       "id": "trust_in_government",
-      "label": "Trust in Government",
+      "label": "政府への信頼",
       "tier": "core",
       "definition": "市民と政府の間の信頼関係の重要性。",
       "aliases": [
@@ -158,7 +158,7 @@
     },
     {
       "id": "emergent_democracy",
-      "label": "Emergent Democracy",
+      "label": "創発民主制",
       "tier": "core",
       "definition": "市民の自発的参加と協働による政治形成の可能性。",
       "aliases": [
@@ -172,7 +172,7 @@
     },
     {
       "id": "product-market_fit",
-      "label": "Product-Market Fit",
+      "label": "プロダクト・マーケット・フィット",
       "tier": "core",
       "definition": "市場における製品の適合性を評価する指標。",
       "aliases": [
@@ -186,7 +186,7 @@
     },
     {
       "id": "ai_in_democracy",
-      "label": "AI in Democracy",
+      "label": "民主主義におけるAI",
       "tier": "core",
       "definition": "AI技術の民主主義への応用とその影響。",
       "aliases": [
@@ -200,7 +200,7 @@
     },
     {
       "id": "diversity",
-      "label": "Diversity",
+      "label": "多様性",
       "tier": "core",
       "definition": "異なる視点や背景を持つ人々の共存の重要性。",
       "aliases": [
@@ -218,7 +218,7 @@
       "source": "plurality",
       "target": "collaboration",
       "relation": "requires",
-      "relation_description": "Plurality requires collaboration across social differences.",
+      "relation_description": "Pluralityは社会的差異を超えたコラボレーションを必要とする。",
       "confidence": 0.9,
       "evidence": [
         {
@@ -230,7 +230,7 @@
       "source": "collaboration",
       "target": "cooperation",
       "relation": "includes",
-      "relation_description": "Collaboration includes cooperation across different social groups.",
+      "relation_description": "コラボレーションは異なる社会集団間でのコオペレーションを含む。",
       "confidence": 0.8,
       "evidence": [
         {
@@ -242,7 +242,7 @@
       "source": "quadratic_voting",
       "target": "quadratic_funding",
       "relation": "related to",
-      "relation_description": "Quadratic Voting is related to Quadratic Funding as both are mechanisms proposed by Glen Weyl.",
+      "relation_description": "クアドラティック投票とクアドラティック資金提供は、どちらもグレン・ワイルが提案したメカニズムとして関連している。",
       "confidence": 0.85,
       "evidence": [
         {
@@ -254,7 +254,7 @@
       "source": "digital_democracy",
       "target": "trust_in_government",
       "relation": "enhances",
-      "relation_description": "Digital Democracy enhances trust in government through collaborative platforms.",
+      "relation_description": "デジタル民主主義は協働プラットフォームを通じて政府への信頼を高める。",
       "confidence": 0.9,
       "evidence": [
         {
@@ -266,7 +266,7 @@
       "source": "complex_systems",
       "target": "cybernetics",
       "relation": "influences",
-      "relation_description": "Complex Systems influences Cybernetics as both deal with interactions leading to emergent phenomena.",
+      "relation_description": "複雑系とサイバネティックスは、どちらも相互作用から創発現象を生み出すため影響し合っている。",
       "confidence": 0.75,
       "evidence": [
         {
@@ -278,7 +278,7 @@
       "source": "ai_in_democracy",
       "target": "digital_democracy",
       "relation": "supports",
-      "relation_description": "AI in Democracy supports Digital Democracy by enhancing citizen engagement.",
+      "relation_description": "民主主義におけるAIは市民参加を促進することでデジタル民主主義を支援する。",
       "confidence": 0.8,
       "evidence": [
         {
@@ -290,7 +290,7 @@
       "source": "diversity",
       "target": "collaboration",
       "relation": "enables",
-      "relation_description": "Diversity enables collaboration by bringing together different perspectives.",
+      "relation_description": "多様性は異なる視点を結集することでコラボレーションを可能にする。",
       "confidence": 0.85,
       "evidence": [
         {
@@ -302,11 +302,149 @@
       "source": "product-market_fit",
       "target": "digital_democracy",
       "relation": "requires",
-      "relation_description": "Product-Market Fit requires Digital Democracy mechanisms for effective implementation.",
+      "relation_description": "プロダクト・マーケット・フィットは効果的な実装のためにデジタル民主主義のメカニズムを必要とする。",
       "confidence": 0.7,
       "evidence": [
         {
           "text": "どれがPMFを達成していて、どれがプルーフ・オブ・コンセプト（PoC）のレベルなのかを理解することが大事だ。"
+        }
+      ]
+    },
+    {
+      "source": "diversity",
+      "target": "creative_process",
+      "relation": "源泉",
+      "relation_description": "多様性（差異）は創造的プロセスの源泉である。",
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "text": "創造的プロセスを生み出す源泉こそが差異であり、差異は必ずしも悪いものではない。"
+        }
+      ]
+    },
+    {
+      "source": "emergent_democracy",
+      "target": "digital_democracy",
+      "relation": "先駆",
+      "relation_description": "創発民主制はデジタル民主主義の先駆・源流の一つである。",
+      "confidence": 0.90,
+      "evidence": [
+        {
+          "text": "03年に伊藤穰一は「創発民主制」を提唱し、インターネットを通じた市民の自発的参加と協働による政治形成の可能性を示した。"
+        }
+      ]
+    },
+    {
+      "source": "social_relationships",
+      "target": "diversity",
+      "relation": "生成",
+      "relation_description": "社会関係は役割の違いを生み、多様性（差異）をもたらす。",
+      "confidence": 0.82,
+      "evidence": [
+        {
+          "text": "人間はアトミックな存在ではなく、その社会関係に応じて異なる役割を求められる。"
+        }
+      ]
+    },
+    {
+      "source": "plurality",
+      "target": "digital_democracy",
+      "relation": "包含",
+      "relation_description": "Pluralityはデジタル民主主義を含む広い技術領域である。",
+      "confidence": 0.92,
+      "evidence": [
+        {
+          "text": "したがって、一般的なデジタル民主主義のサービスやツールとして認識されるものに限らず、「社会的差異を超えたコラボレーションのための技術」として実現されるあらゆる活動がPluralityに含まれる。"
+        }
+      ]
+    },
+    {
+      "source": "digital_democracy",
+      "target": "collaboration",
+      "relation": "伴う",
+      "relation_description": "デジタル民主主義は政府と市民の協働（コラボレーション）を伴う。",
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "text": "政府と市民が協働して法案を検討するvTaiwanプラットフォーム"
+        }
+      ]
+    },
+    {
+      "source": "quadratic_voting",
+      "target": "plurality",
+      "relation": "メカニズム",
+      "relation_description": "クアドラティック投票はPluralityで論じられる社会技術の一例である。",
+      "confidence": 0.78,
+      "evidence": [
+        {
+          "text": "ワイルの代表的なアイデアにクアドラティック投票（Quadratic Voting: QV）がある。"
+        },
+        {
+          "text": "本書の第5章では、Pluralityのさまざまなメカニズムや実践例が紹介されている。"
+        }
+      ]
+    },
+    {
+      "source": "quadratic_funding",
+      "target": "plurality",
+      "relation": "メカニズム",
+      "relation_description": "クアドラティック資金提供はPluralityの射程に含まれる社会的メカニズムである。",
+      "confidence": 0.78,
+      "evidence": [
+        {
+          "text": "クアドラティック資金提供（Quadratic Funding: QF）も提案し、不特定多数からの小口支援を効果的に集め、公共プロジェクトを資金面から支えるメカニズムを実験している。"
+        },
+        {
+          "text": "コンピュータ技術なくしては実現できない具体的な貨幣システムや投票システムを設計しているところなど、双子の書籍といっても過言ではないほどの共通点がある。"
+        }
+      ]
+    },
+    {
+      "source": "complex_systems",
+      "target": "plurality",
+      "relation": "バックボーン",
+      "relation_description": "複雑系はPluralityの科学的バックボーンの一つである。",
+      "confidence": 0.93,
+      "evidence": [
+        {
+          "text": "個々人および社会的差異を生成する科学的バックボーンとして、本書では第3章で複雑系とウィーナーのサイバネティックスを挙げている。"
+        }
+      ]
+    },
+    {
+      "source": "cybernetics",
+      "target": "plurality",
+      "relation": "バックボーン",
+      "relation_description": "サイバネティックスはPluralityの科学的バックボーンである。",
+      "confidence": 0.93,
+      "evidence": [
+        {
+          "text": "個々人および社会的差異を生成する科学的バックボーンとして、本書では第3章で複雑系とウィーナーのサイバネティックスを挙げている。"
+        }
+      ]
+    },
+    {
+      "source": "cybernetics",
+      "target": "ai_in_democracy",
+      "relation": "基盤",
+      "relation_description": "サイバネティックスは民主主義に適用されるAI技術の基盤となった。",
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "text": "また現在のAIのコア技術である人工ニューラルネットワークもサイバネティックスの潮流から生まれてきた。"
+        }
+      ]
+    },
+    {
+      "source": "ai_in_democracy",
+      "target": "creative_process",
+      "relation": "支援",
+      "relation_description": "民主主義領域でのAIは創造的な意見の発見を支援し得る。",
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "text": "AIが少数意見や創造的な意見の発見をしたらどうなるか"
         }
       ]
     }

@@ -59,8 +59,12 @@ def find_graph_file(base_dir: Path, section_id: str) -> Path:
 
 def find_markdown_file(section_id: str) -> Path:
     """セクションIDに対応するMarkdownファイルを探す"""
-    # 複数のパターンで探す
-    patterns = [f"{section_id}*.md", f"section_{section_id}.md"]
+    # extra-1 -> 1.md のマッピング
+    if section_id.startswith("extra-"):
+        file_num = section_id.split("-")[1]
+        patterns = [f"{file_num}.md"]
+    else:
+        patterns = [f"{section_id}*.md", f"section_{section_id}.md"]
 
     # 複数のディレクトリで探す
     search_dirs = [
@@ -68,6 +72,7 @@ def find_markdown_file(section_id: str) -> Path:
         Path("./contents/japanese"),
         Path("./temp_0-2"),
         Path("./test_input_sec3-0"),
+        Path("./extra-input"),  # extra-input ディレクトリを追加
     ]
 
     for search_dir in search_dirs:
