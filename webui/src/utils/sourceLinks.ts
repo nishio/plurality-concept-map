@@ -8,6 +8,25 @@ export const getSourceUrl = (
   evidence?: Evidence,
   baseUrl?: string
 ): string | null => {
+  // Extraセクションの専用URL処理
+  if (sectionId.startsWith('extra-')) {
+    const extraUrls: Record<string, string> = {
+      'extra-1': 'https://cybozushiki.cybozu.co.jp/articles/m006262.html',
+      'extra-2': 'https://cybozushiki.cybozu.co.jp/articles/m006261.html',
+      'extra-3': 'https://wired.jp/article/what-is-plurality-book/'
+    };
+    
+    const extraUrl = extraUrls[sectionId];
+    if (extraUrl) {
+      // テキストフラグメントの生成
+      if (evidence?.text) {
+        const textFragment = createTextFragment(evidence.text);
+        return `${extraUrl}#:~:text=${textFragment}`;
+      }
+      return extraUrl;
+    }
+  }
+
   // デフォルトのベースURL（Plurality.net）
   const defaultBaseUrl = 'https://www.plurality.net/v/chapters';
   const url = baseUrl || defaultBaseUrl;
