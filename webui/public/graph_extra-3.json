@@ -1,0 +1,279 @@
+{
+  "nodes": [
+    {
+      "id": "plurality",
+      "label": "Plurality",
+      "tier": "core",
+      "definition": "社会的差異を超えたコラボレーションのための技術。",
+      "aliases": [
+        "多元性",
+        "多数性"
+      ],
+      "evidence": [
+        {
+          "text": "Pluralityとは「社会的差異を超えたコラボレーションのための技術」である。"
+        }
+      ]
+    },
+    {
+      "id": "collaboration",
+      "label": "Collaboration",
+      "tier": "core",
+      "definition": "共有された創造的プロセスを強調する協力の形。",
+      "aliases": [
+        "共創",
+        "ピア・プロダクション"
+      ],
+      "evidence": [
+        {
+          "text": "『コラボレーション』という言葉を用いて『共創』や『ピア・プロダクション』を表現し、共有された創造的プロセスを強調している。"
+        }
+      ]
+    },
+    {
+      "id": "cooperation",
+      "label": "Cooperation",
+      "tier": "core",
+      "definition": "取引的な相互作用を指す協力の形。",
+      "aliases": [
+        "コオペレーション"
+      ],
+      "evidence": [
+        {
+          "text": "『コオペレーション』にはこの意味合いも含まれるが、必ずしも創造的な相乗効果を伴わず、より取引的な相互作用を指す場合もある。"
+        }
+      ]
+    },
+    {
+      "id": "digital_democracy",
+      "label": "Digital Democracy",
+      "tier": "core",
+      "definition": "市民参加を促進するためのデジタル技術の活用。",
+      "aliases": [
+        "デジタル民主主義"
+      ],
+      "evidence": [
+        {
+          "text": "台湾政府はvTaiwanなどのオンライン対話プラットフォームを活用し、市民と政府が共に議論し合意形成を図る仕組みを確立した。"
+        }
+      ]
+    },
+    {
+      "id": "quadratic_voting",
+      "label": "Quadratic Voting",
+      "tier": "core",
+      "definition": "投票権を自由に配分し、意志の強さを反映する投票方法。",
+      "aliases": [
+        "QV",
+        "クアドラティック投票"
+      ],
+      "evidence": [
+        {
+          "text": "QVでは、各参加者に与えられた「投票権（ボイスクレジット）」を自由に配分して複数票を投じることができる。"
+        }
+      ]
+    },
+    {
+      "id": "quadratic_funding",
+      "label": "Quadratic Funding",
+      "tier": "core",
+      "definition": "不特定多数からの小口支援を集める資金調達メカニズム。",
+      "aliases": [
+        "QF",
+        "クアドラティック資金提供"
+      ],
+      "evidence": [
+        {
+          "text": "QVの応用としてクアドラティック資金提供（Quadratic Funding: QF）も提案し、不特定多数からの小口支援を効果的に集め、公共プロジェクトを資金面から支えるメカニズムを実験している。"
+        }
+      ]
+    },
+    {
+      "id": "complex_systems",
+      "label": "Complex Systems",
+      "tier": "core",
+      "definition": "単純な要素の相互作用から複雑な現象が生じる科学。",
+      "aliases": [
+        "複雑系"
+      ],
+      "evidence": [
+        {
+          "text": "複雑系の科学では、たとえ個々の素子が単純であっても、その相互作用からカオスやフラクタルなどの複雑な現象が生じる。"
+        }
+      ]
+    },
+    {
+      "id": "cybernetics",
+      "label": "Cybernetics",
+      "tier": "core",
+      "definition": "制御技術が生命の不可分な拡張であることを示す学問。",
+      "aliases": [
+        "サイバネティックス"
+      ],
+      "evidence": [
+        {
+          "text": "サイバネティックスは、生命のなかに制御技術が存在し、技術が生命の不可分な拡張であることを示している。"
+        }
+      ]
+    },
+    {
+      "id": "social_relations",
+      "label": "Social Relations",
+      "tier": "core",
+      "definition": "人間が異なる役割を求められる社会的なつながり。",
+      "aliases": [
+        "社会関係"
+      ],
+      "evidence": [
+        {
+          "text": "人間はアトミックな存在ではなく、その社会関係に応じて異なる役割を求められる。"
+        }
+      ]
+    },
+    {
+      "id": "creative_process",
+      "label": "Creative Process",
+      "tier": "core",
+      "definition": "差異を包容することで生まれる新たなアイデアの生成過程。",
+      "aliases": [
+        "創造的プロセス"
+      ],
+      "evidence": [
+        {
+          "text": "創造的プロセスを生み出す源泉こそが差異であり、差異は必ずしも悪いものではない。"
+        }
+      ]
+    },
+    {
+      "id": "trust_in_government",
+      "label": "Trust in Government",
+      "tier": "core",
+      "definition": "市民と政府の協働によって築かれる信頼関係。",
+      "aliases": [
+        "政府への信頼"
+      ],
+      "evidence": [
+        {
+          "text": "タンは、この一連のデジタル協働を通じ、台湾社会において不信が高まっていた政府への信頼を取り戻すことに成功した。"
+        }
+      ]
+    },
+    {
+      "id": "emergent_democracy",
+      "label": "Emergent Democracy",
+      "tier": "core",
+      "definition": "市民の自発的参加と協働による政治形成の可能性。",
+      "aliases": [
+        "創発民主制"
+      ],
+      "evidence": [
+        {
+          "text": "伊藤穰一は「創発民主制」を提唱し、インターネットを通じた市民の自発的参加と協働による政治形成の可能性を示した。"
+        }
+      ]
+    },
+    {
+      "id": "product-market_fit",
+      "label": "Product-Market Fit",
+      "tier": "core",
+      "definition": "市場のニーズに合致した製品やサービスの適合性。",
+      "aliases": [
+        "PMF",
+        "プロダクト・マーケット・フィット"
+      ],
+      "evidence": [
+        {
+          "text": "今後はより仕組み化していき、誰もが実践できるようにしなくてはいけない。そのキーワードは、プロダクト・マーケット・フィット（PMF）だとわたしは考えている。"
+        }
+      ]
+    },
+    {
+      "id": "ai_in_democracy",
+      "label": "AI in Democracy",
+      "tier": "core",
+      "definition": "AI技術を用いた新たな民主主義の実践。",
+      "aliases": [
+        "AIと民主主義"
+      ],
+      "evidence": [
+        {
+          "text": "特にAI時代の到来により、これまで不可能と思われていたことが可能になるかもしれない。"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "plurality",
+      "target": "collaboration",
+      "relation": "includes",
+      "relation_description": "Pluralityは社会的差異を超えたコラボレーションのための技術である。",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "text": "Pluralityとは「社会的差異を超えたコラボレーションのための技術」である。"
+        }
+      ]
+    },
+    {
+      "source": "collaboration",
+      "target": "cooperation",
+      "relation": "related to",
+      "relation_description": "CollaborationはCooperationと関連しているが、より創造的なプロセスを強調している。",
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "text": "私は『コラボレーション』という言葉を用いて『共創』や『ピア・プロダクション』を表現し、共有された創造的プロセスを強調している。"
+        }
+      ]
+    },
+    {
+      "source": "quadratic_voting",
+      "target": "quadratic_funding",
+      "relation": "applies to",
+      "relation_description": "Quadratic Votingの応用としてQuadratic Fundingが提案されている。",
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "text": "QVの応用としてクアドラティック資金提供（Quadratic Funding: QF）も提案し、不特定多数からの小口支援を効果的に集め、公共プロジェクトを資金面から支えるメカニズムを実験している。"
+        }
+      ]
+    },
+    {
+      "source": "trust_in_government",
+      "target": "digital_democracy",
+      "relation": "enhances",
+      "relation_description": "Digital Democracyは政府への信頼を高める役割を果たす。",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "text": "タンは、この一連のデジタル協働を通じ、台湾社会において不信が高まっていた政府への信頼を取り戻すことに成功した。"
+        }
+      ]
+    },
+    {
+      "source": "complex_systems",
+      "target": "cybernetics",
+      "relation": "influences",
+      "relation_description": "Complex SystemsはCyberneticsに影響を与えている。",
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "text": "複雑系の科学では、たとえ個々の素子が単純であっても、その相互作用からカオスやフラクタルなどの複雑な現象が生じる。"
+        }
+      ]
+    },
+    {
+      "source": "ai_in_democracy",
+      "target": "digital_democracy",
+      "relation": "supports",
+      "relation_description": "AI in DemocracyはDigital Democracyを支える技術である。",
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "text": "AIが大規模なコメントの分類や要約作業を代行したらどうなるか、人間の代わりにAIがファシリテーションをしたらどうなるか。"
+        }
+      ]
+    }
+  ]
+}
